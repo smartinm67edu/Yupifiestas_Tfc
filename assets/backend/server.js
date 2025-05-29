@@ -1,32 +1,34 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 const cors = require('cors');
-require('dotenv').config();
 
-// Routers
 const authRoutes = require('./routes/authRoutes');
-const reservaRoutes = require('./routes/reservaRoutes');
-
-// Conexión a MongoDB
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('✅ Conectado a MongoDB'))
-  .catch(err => console.error('❌ Error de MongoDB:', err));
+const vistaRoutes = require('./routes/vistaRoutes'); // para /api/castillos, /api/eventos
 
 const app = express();
+const PORT = process.env.PORT || 5000;
 
-// Middlewares
+// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Rutas
-app.use('/auth', authRoutes); 
-app.use('/api/reservas', reservaRoutes);
+// Rutas API
+app.use('/auth', authRoutes);
+app.use('/api', vistaRoutes);
 
-// Ruta de prueba para verificar que el servidor funciona
-app.get('/', (req, res) => {
-  res.send('Servidor de Yupifiestas funcionando');
-});
+// Servir frontend desde carpeta pública
+app.use('/', express.static(path.join(__dirname, '../frontend')));
 
-// Iniciar servidor
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🟢 Servidor en http://localhost:${PORT}`));
+// Conexión a MongoDB Atlas
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log('🟢 Conectado a MongoDB Atlas');
+    app.listen(PORT, () => {
+      console.log(`🚀 Servidor escuchando en http://localhost:${PORT}`);
+    });
+  })
+  .catch(err => {
+    console.error('❌ Error al conectar a MongoDB:', err.message);
+  });
