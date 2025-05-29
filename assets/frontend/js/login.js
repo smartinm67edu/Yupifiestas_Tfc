@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const userEmail = document.getElementById('user-email');
   const logoutBtn = document.getElementById('logout-btn');
 
-  // Cambiar entre formularios
+  // Alternar formularios
   showRegister?.addEventListener('click', () => {
     loginForm.style.display = 'none';
     registerForm.style.display = 'block';
@@ -36,45 +36,44 @@ document.addEventListener('DOMContentLoaded', () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
       });
-      const data = await res.json();
 
+      const data = await res.json();
       if (res.status === 201) {
         alert('✅ Registro exitoso. Ahora puedes iniciar sesión.');
-        showLogin?.click();
+        showLogin.click();
       } else {
         alert(`❌ ${data.message || 'Error al registrarse'}`);
       }
     } catch (error) {
-      alert('Error de conexión con el servidor');
       console.error(error);
+      alert('❌ Error al conectar con el servidor');
     }
   });
 
-  document.getElementById('login-btn').addEventListener('click', async () => {
-    const email = document.getElementById('login-email').value;
+  // Login
+  loginBtn?.addEventListener('click', async () => {
+    const email = document.getElementById('login-email').value.trim();
     const password = document.getElementById('login-password').value;
 
+    if (!email || !password) return alert('Completa todos los campos');
+
     try {
-      const response = await fetch('http://localhost:5000/auth/login', {  // ✔ URL correcta
+      const res = await fetch('http://localhost:5000/auth/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
       });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        // Guardar datos de usuario
-        localStorage.setItem('user', JSON.stringify(data.user));
-        window.location.href = '/index.html';  // Redirigir tras login
+      const data = await res.json();
+      if (res.ok) {
+        sessionStorage.setItem('user', JSON.stringify(data.user));
+        window.location.href = '/index.html';
       } else {
-        alert(data.message || 'Error al iniciar sesión');
+        alert(data.message || '❌ Credenciales inválidas');
       }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Error al conectar con el servidor');
+    } catch (err) {
+      console.error(err);
+      alert('❌ Error al conectar con el servidor');
     }
   });
 
@@ -88,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     userEmail.textContent = user.email;
   }
 
-  // Cerrar sesión
+  // Logout
   logoutBtn?.addEventListener('click', () => {
     sessionStorage.removeItem('user');
     location.reload();

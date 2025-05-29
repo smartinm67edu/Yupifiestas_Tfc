@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const usuarioSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
-  password: { type: String, required: true }, // cifrada con bcrypt
+  password: { type: String, required: true },
   role: { type: String, enum: ['admin', 'user'], default: 'user' }
 });
 
