@@ -88,3 +88,14 @@ https://yupifiestas.onrender.com/html/login.html
 
 Este proyecto ha sido desarrollado por un estudiante como parte de un trabajo final de ciclo formativo. Su objetivo es proporcionar una solución web funcional para la gestión de eventos con castillos hinchables.
 
+---
+
+## 📜 Archivos ignorados en el repositorio
+
+Para el correcto funcionamiento de la aplicación, asegúrate de que los siguientes archivos y carpetas estén ignorados en tu repositorio Git:
+
+```
+.env
+node_modules/
+```
+
