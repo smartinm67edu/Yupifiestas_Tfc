@@ -485,3 +485,15 @@ body {
   .social-btn.whatsapp:hover {
     background-color: #3ee37b;
   }
+
+  .user-controls {
+    background-color: #fff;
+    padding: 1rem 0;
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 2rem;
+}
+
+.user-controls .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
