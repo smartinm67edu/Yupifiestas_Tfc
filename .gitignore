@@ -1,0 +1,90 @@
+# Yupifiestas - Plataforma de alquiler de castillos hinchables
+
+**Yupifiestas** es una aplicación web desarrollada para gestionar el alquiler de castillos hinchables y la administración de reservas para diferentes tipos de eventos. La plataforma permite tanto a usuarios registrados realizar reservas como a administradores gestionar la disponibilidad de los castillos.
+
+## 🧩 Tecnologías utilizadas
+
+- **Frontend:** HTML5, CSS3, JavaScript
+- **Backend:** Node.js + Express
+- **Base de datos:** MongoDB Atlas
+- **Despliegue:** Render.com
+
+---
+
+## 📁 Estructura del proyecto
+
+yupifiestas/
+├─ backend/ # API RESTful con Express
+│ ├─ controllers/ # Lógica de autenticación y reservas
+│ ├─ models/ # Esquemas de Mongoose
+│ ├─ routes/ # Definición de rutas del servidor
+│ ├─ .env # Variables de entorno
+│ ├─ server.js # Punto de entrada de la API
+│ └─ package.json
+│
+├─ frontend/ # Archivos públicos de la web
+│ ├─ html/ # Páginas HTML (login, reservas, etc.)
+│ ├─ css/ # Estilos personalizados
+│ ├─ js/ # Scripts de interfaz y lógica de usuario
+│ └─ img/ # Imágenes y videos
+
+
+---
+
+## 🌐 Despliegue en Render
+
+### Requisitos previos:
+- Tener MongoDB Atlas configurado y accesible
+- Subir el proyecto completo a un repositorio GitHub
+
+### Instrucciones para desplegar:
+
+1. Crear un nuevo servicio web en [https://render.com](https://render.com)
+2. Conectar el repositorio de GitHub que contiene este proyecto
+3. Configurar los siguientes parámetros:
+
+   - **Root Directory:** `backend`
+   - **Build Command:** *(dejar vacío o `npm install`)*
+   - **Start Command:** `npm start`
+   - **Environment Variables:**
+     ```
+     MONGO_URI=mongodb+srv://<usuario>:<password>@cluster.mongodb.net/yupifiestas
+     ```
+
+4. Render generará una URL pública donde estará alojada la web.
+
+---
+
+## 🔐 Roles y funcionalidades
+
+### Usuarios
+- Registro e inicio de sesión
+- Realizar reservas de castillos disponibles
+
+### Administrador
+- Acceso a panel de reservas
+- Visualización y liberación de reservas
+- Creación de nuevos castillos
+
+---
+
+## 📌 Acceso a la plataforma
+
+Una vez desplegada, la plataforma estará disponible en una URL tipo:
+
+https://yupifiestas.onrender.com/html/login.html
+
+---
+
+## 🚀 Próximas mejoras
+
+- Integración con pasarela de pagos
+- Panel de estadísticas y análisis de eventos
+- Notificaciones por correo electrónico
+
+---
+
+## 🧑‍💻 Autor
+
+Este proyecto ha sido desarrollado por un estudiante como parte de un trabajo final de ciclo formativo. Su objetivo es proporcionar una solución web funcional para la gestión de eventos con castillos hinchables.
+
