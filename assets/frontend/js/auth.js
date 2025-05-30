@@ -1,38 +1,36 @@
 class AuthService {
     constructor() {
-        this.apiUrl = 'http://localhost:5000/api/auth';
-        this.token = localStorage.getItem('token');
-        this.checkAuthStatus();
-    }
-
-    checkAuthStatus() {
-        if (!this.token && window.location.pathname.includes('reserva.html')) {
-            window.location.href = 'login.html';
-        }
-    }
-
-    async loadProtectedContent() {
-        try {
-            const response = await fetch('http://localhost:5000/api/castillos', {
-                headers: {
-                    'Authorization': `Bearer ${this.token}`
-                }
-            });
-
-            if (!response.ok) {
-                throw new Error('No autorizado');
-            }
-
-            return await response.json();
-        } catch (error) {
-            console.error('Error:', error);
-            window.location.href = 'login.html';
-        }
+        this.apiUrl = 'http://localhost:5000/api';
     }
 
     async login(email, password) {
         try {
-            const response = await fetch(`${this.apiUrl}/login`, {
+            const response = await fetch(`${this.apiUrl}/auth/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.message || 'Error en el login');
+            }
+
+            const data = await response.json();
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('user', JSON.stringify(data.user));
+            return data;
+        } catch (error) {
+            console.error('Error en login:', error);
+            throw error;
+        }
+    }
+
+    async register(email, password) {
+        try {
+            const response = await fetch(`${this.apiUrl}/auth/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -41,46 +39,46 @@ class AuthService {
             });
 
             const data = await response.json();
-            
-            if (!response.ok) {
-                throw new Error(data.message || 'Error en el login');
-            }
+            if (!response.ok) throw new Error(data.message);
 
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('user', JSON.stringify(data.user));
-            window.location.href = 'reserva.html';
             return data;
         } catch (error) {
+            console.error('Error en registro:', error);
             throw error;
         }
     }
 
-    async register(email, password) {
+    async loadCastillos() {
+        return this.fetchProtectedResource('/castillos');
+    }
+
+    async loadEventos() {
+        return this.fetchProtectedResource('/eventos');
+    }
+
+    async loadPacks() {
+        return this.fetchProtectedResource('/packs');
+    }
+
+    async fetchProtectedResource(endpoint) {
         try {
-            const response = await fetch(`${this.apiUrl}/register`, {
-                method: 'POST',
+            const response = await fetch(`${this.apiUrl}${endpoint}`, {
                 headers: {
+                    'Authorization': `Bearer ${this.token}`,
                     'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email,
-                    password,
-                    username: email.split('@')[0]
-                })
+                }
             });
 
-            const data = await response.json();
-            
-            if (!response.ok) {
-                throw new Error(data.message || 'Error en el registro');
-            }
-
-            // Auto login after registration
-            await this.login(email, password);
-            return data;
+            if (!response.ok) throw new Error(`Error al cargar ${endpoint}`);
+            return await response.json();
         } catch (error) {
+            console.error(`Error fetching ${endpoint}:`, error);
             throw error;
         }
+    }
+
+    isAuthenticated() {
+        return !!this.token;
     }
 
     logout() {
@@ -89,8 +87,8 @@ class AuthService {
         window.location.href = 'login.html';
     }
 
-    isAuthenticated() {
-        return !!this.token;
+    getToken() {
+        return this.token;
     }
 }
 
