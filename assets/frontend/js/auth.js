@@ -1,6 +1,7 @@
 class AuthService {
     constructor() {
         this.apiUrl = 'http://localhost:5000/api';
+        this.token = localStorage.getItem('token');
     }
 
     async login(email, password) {
@@ -13,14 +14,16 @@ class AuthService {
                 body: JSON.stringify({ email, password })
             });
 
+            const data = await response.json();
             if (!response.ok) {
-                const error = await response.json();
-                throw new Error(error.message || 'Error en el login');
+                throw new Error(data.message || 'Error en el login');
             }
 
-            const data = await response.json();
+            // Guardar token y datos del usuario
+            this.token = data.token;
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
+            
             return data;
         } catch (error) {
             console.error('Error en login:', error);
@@ -28,51 +31,59 @@ class AuthService {
         }
     }
 
-    async register(email, password) {
+    async loadCastillos() {
         try {
-            const response = await fetch(`${this.apiUrl}/auth/register`, {
-                method: 'POST',
+            const response = await fetch(`${this.apiUrl}/castillos`, {
                 headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email, password })
+                    'Authorization': `Bearer ${this.token}`
+                }
             });
 
-            const data = await response.json();
-            if (!response.ok) throw new Error(data.message);
+            if (!response.ok) {
+                throw new Error('Error al cargar castillos');
+            }
 
-            return data;
+            return await response.json();
         } catch (error) {
-            console.error('Error en registro:', error);
+            console.error('Error cargando castillos:', error);
             throw error;
         }
     }
 
-    async loadCastillos() {
-        return this.fetchProtectedResource('/castillos');
-    }
-
     async loadEventos() {
-        return this.fetchProtectedResource('/eventos');
-    }
-
-    async loadPacks() {
-        return this.fetchProtectedResource('/packs');
-    }
-
-    async fetchProtectedResource(endpoint) {
         try {
-            const response = await fetch(`${this.apiUrl}${endpoint}`, {
+            const response = await fetch(`${this.apiUrl}/eventos`, {
                 headers: {
-                    'Authorization': `Bearer ${this.token}`,
-                    'Content-Type': 'application/json'
+                    'Authorization': `Bearer ${this.token}`
                 }
             });
 
-            if (!response.ok) throw new Error(`Error al cargar ${endpoint}`);
+            if (!response.ok) {
+                throw new Error('Error al cargar eventos');
+            }
+
             return await response.json();
         } catch (error) {
-            console.error(`Error fetching ${endpoint}:`, error);
+            console.error('Error cargando eventos:', error);
+            throw error;
+        }
+    }
+
+    async loadPacks() {
+        try {
+            const response = await fetch(`${this.apiUrl}/packs`, {
+                headers: {
+                    'Authorization': `Bearer ${this.token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al cargar packs');
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error('Error cargando packs:', error);
             throw error;
         }
     }
@@ -82,13 +93,10 @@ class AuthService {
     }
 
     logout() {
+        this.token = null;
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         window.location.href = 'login.html';
-    }
-
-    getToken() {
-        return this.token;
     }
 }
 
