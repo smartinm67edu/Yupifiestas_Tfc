@@ -35,12 +35,14 @@ class AuthService {
         try {
             const response = await fetch(`${this.apiUrl}/castillos`, {
                 headers: {
-                    'Authorization': `Bearer ${this.token}`
+                    'Authorization': `Bearer ${this.token}`,
+                    'Content-Type': 'application/json'
                 }
             });
 
             if (!response.ok) {
-                throw new Error('Error al cargar castillos');
+                const error = await response.json();
+                throw new Error(error.message || 'Error al cargar castillos');
             }
 
             return await response.json();

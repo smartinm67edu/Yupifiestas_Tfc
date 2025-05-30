@@ -1,24 +1,24 @@
 const mongoose = require('mongoose');
 
 const packSchema = new mongoose.Schema({
-    nombre: { 
-        type: String, 
-        required: true 
+    nombre: {
+        type: String,
+        required: true
     },
-    descripcion: { 
-        type: String, 
-        required: true 
+    descripcion: {
+        type: String,
+        required: true
     },
-    imagen: { 
-        type: String 
+    imagen: {
+        type: String
     },
-    precio: { 
-        type: Number, 
-        required: true 
+    precio: {
+        type: Number,
+        required: true
     },
-    descuento: { 
-        type: Number, 
-        default: 0 
+    descuento: {
+        type: Number,
+        default: 0
     },
     castillos: [{
         type: mongoose.Schema.Types.ObjectId,

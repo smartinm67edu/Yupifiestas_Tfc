@@ -18,6 +18,10 @@ mongoose.connect(process.env.MONGODB_URI)
 
 // Import User model
 const User = require('./models/user');
+const authMiddleware = require('./middleware/auth');
+const Castillo = require('./models/castillo');
+const Evento = require('./models/evento');
+const Pack = require('./models/pack');
 
 // Login endpoint
 app.post('/api/auth/login', async (req, res) => {
@@ -56,6 +60,42 @@ app.post('/api/auth/login', async (req, res) => {
     } catch (error) {
         console.error('Error en login:', error);
         res.status(500).json({ message: 'Error en el servidor' });
+    }
+});
+
+// Ruta protegida para obtener castillos
+app.get('/api/castillos', authMiddleware, async (req, res) => {
+    try {
+        const castillos = await Castillo.find();
+        res.json(castillos);
+    } catch (error) {
+        console.error('Error al obtener castillos:', error);
+        res.status(500).json({ message: 'Error al obtener castillos' });
+    }
+});
+
+// Ruta para obtener eventos
+app.get('/api/eventos', authMiddleware, async (req, res) => {
+    try {
+        const eventos = await Evento.find()
+            .populate('castillos')
+            .populate('pack');
+        res.json(eventos);
+    } catch (error) {
+        console.error('Error al obtener eventos:', error);
+        res.status(500).json({ message: 'Error al obtener eventos' });
+    }
+});
+
+// Ruta para obtener packs
+app.get('/api/packs', authMiddleware, async (req, res) => {
+    try {
+        const packs = await Pack.find()
+            .populate('castillos');
+        res.json(packs);
+    } catch (error) {
+        console.error('Error al obtener packs:', error);
+        res.status(500).json({ message: 'Error al obtener packs' });
     }
 });
 
