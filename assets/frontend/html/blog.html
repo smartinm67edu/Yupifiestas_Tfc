@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Blog - Yupifiestas</title>
   <link rel="stylesheet" href="../css/blog.css">
-  <script src="assets/js/script.js" defer></script>
+  <script src="../js/blog.js" defer></script>
 </head>
 
 <body>
@@ -34,28 +34,392 @@
     </div>
   </header>
   <main class="blog-container">
-    <article class="blog-post">
-      <img src="../img/blog/cumple-tematico.jpg" alt="Cumpleaños temático">
-      <h2>🎈 Ideas para cumpleaños temáticos</h2>
-      <p>Descubre las mejores ideas para organizar un cumpleaños inolvidable con castillos hinchables temáticos,
-        decoración personalizada y juegos divertidos.</p>
-      <a href="#">Leer más →</a>
+    <article class="blog-post" data-post-id="cumpleanos">
+        <div class="blog-preview">
+            <img src="../img/blog/cumple-tematico.jpg" alt="Cumpleaños temático">
+            <h2>🎈 Ideas para cumpleaños temáticos</h2>
+            <p class="preview-text">Descubre cómo crear la fiesta perfecta con nuestros castillos temáticos: Patrulla Canina, Princesas Disney, 
+            Superhéroes y mucho más. Incluye ideas de decoración, juegos y animación.</p>
+            <button class="expand-btn">Leer más →</button>
+        </div>
+        <div class="blog-content hidden">
+            <div class="content-wrapper">
+                <button class="close-btn">✕</button>
+                <h2>🎈 Ideas para cumpleaños temáticos</h2>
+                <div class="post-meta">
+                    <span class="date">Mayo 2025</span>
+                    <span class="category">Fiestas Infantiles</span>
+                </div>
+                <div class="post-gallery">
+                    <img src="../img/blog/cumple1.jpg" alt="Decoración temática">
+                    <img src="../img/blog/cumple2.jpg" alt="Actividades">
+                    <img src="../img/blog/cumple3.jpg" alt="Castillo temático">
+                </div>
+                <div class="post-content">
+                    <h3>¿Por qué elegir una fiesta temática?</h3>
+                    <p>Las fiestas temáticas crean recuerdos inolvidables y permiten una experiencia completamente inmersiva. Cada detalle, desde la decoración hasta las actividades, se coordina para crear un mundo mágico...</p>
+                    
+                    <h3>Nuestros temas más populares</h3>
+                    <ul>
+                        <li><strong>Patrulla Canina:</strong> Incluye castillo temático, decoración con personajes y juegos de rescate</li>
+                        <li><strong>Princesas Disney:</strong> Castillo rosa, coronas, varitas mágicas y caracterización</li>
+                        <li><strong>Superhéroes:</strong> Circuito de aventuras, disfraces y misiones especiales</li>
+                    </ul>
+
+                    <h3>Servicios incluidos</h3>
+                    <ul>
+                        <li>Castillo hinchable temático</li>
+                        <li>Decoración completa del espacio</li>
+                        <li>Animadores caracterizados</li>
+                        <li>Juegos y actividades temáticas</li>
+                        <li>Photocall personalizado</li>
+                        <li>Música ambiente temática</li>
+                    </ul>
+
+                    <div class="cta-section">
+                        <h3>¿Listo para crear una fiesta mágica?</h3>
+                        <p>Contacta con nosotros y te ayudaremos a planificar cada detalle.</p>
+                        <a href="../html/reserva.html" class="cta-button">Reservar ahora</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </article>
 
-    <article class="blog-post">
-      <img src="../img/castillos/patrulla.jpg" alt="Seguridad castillos hinchables">
-      <h2>🛡️ Seguridad en castillos hinchables</h2>
-      <p>Todo lo que debes saber sobre el uso seguro de castillos hinchables para que los más pequeños disfruten sin
-        preocupaciones.</p>
-      <a href="#">Leer más →</a>
+    <article class="blog-post" data-post-id="fiesta-espuma">
+        <div class="blog-preview">
+            <img src="../img/blog/fiesta-espuma.jpg" alt="Fiesta de la espuma">
+            <h2>💫 Fiesta de la Espuma: Diversión Refrescante</h2>
+            <p class="preview-text">La actividad estrella del verano: máquinas de espuma profesionales, música, animadores y zona de juegos acuáticos. 
+            ¡La diversión más refrescante para todas las edades!</p>
+            <button class="expand-btn">Leer más →</button>
+        </div>
+        <div class="blog-content hidden">
+            <div class="content-wrapper">
+                <button class="close-btn">✕</button>
+                <h2>💫 Fiesta de la Espuma: Diversión Refrescante</h2>
+                <div class="post-meta">
+                    <span class="date">Junio 2025</span>
+                    <span class="category">Fiestas Acuáticas</span>
+                </div>
+                <div class="post-gallery">
+                    <img src="../img/blog/espuma1.jpg" alt="Máquina de espuma">
+                    <img src="../img/blog/espuma2.jpg" alt="Diversión en la espuma">
+                    <img src="../img/blog/espuma3.jpg" alt="Fiesta acuática">
+                </div>
+                <div class="post-content">
+                    <h3>¿Qué incluye nuestra Fiesta de la Espuma?</h3>
+                    <p>Nuestra fiesta de la espuma es el paquete completo para un día de diversión sin fin. Incluye máquinas de espuma de última generación, un DJ profesional, animadores expertos y un área de juegos acuáticos segura y emocionante.</p>
+                    
+                    <h3>Beneficios de elegir la Fiesta de la Espuma</h3>
+                    <ul>
+                        <li><strong>Refrescante:</strong> Ideal para combatir el calor en los días soleados.</li>
+                        <li><strong>Diversión garantizada:</strong> La espuma añade un elemento sorpresa y emoción.</li>
+                        <li><strong>Seguridad:</strong> Nuestras instalaciones cumplen con todos los estándares de seguridad.</li>
+                    </ul>
+
+                    <h3>Testimonios</h3>
+                    <blockquote>
+                        <p>"¡La fiesta de la espuma fue un éxito rotundo en el cumpleaños de mi hijo! Todos los niños se divirtieron a lo grande." - <cite>María G.</cite></p>
+                    </blockquote>
+
+                    <div class="cta-section">
+                        <h3>¡No te quedes sin tu fiesta de la espuma!</h3>
+                        <p>Reserva ahora y asegura la fecha de tu evento.</p>
+                        <a href="../html/reserva.html" class="cta-button">Consultar disponibilidad</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </article>
 
-    <article class="blog-post">
-      <img src="../img/castillos/patrulla.jpg" alt="Fiesta despedida de soltero">
-      <h2>🥳 Cómo organizar una despedida original</h2>
-      <p>Tips y actividades divertidas para hacer de tu despedida de soltero/a un evento inolvidable... ¡con castillo
-        incluido!</p>
-      <a href="#">Leer más →</a>
+    <article class="blog-post" data-post-id="gender-reveal">
+        <div class="blog-preview">
+            <img src="../img/blog/gender-reveal.jpg" alt="Gender Reveal Party">
+            <h2>👶 Gender Reveal: Momentos Mágicos</h2>
+            <p class="preview-text">Organiza una revelación de género inolvidable con nuestros packs especiales. Efectos especiales, decoración 
+            temática y sorpresas únicas para el gran momento.</p>
+            <button class="expand-btn">Leer más →</button>
+        </div>
+        <div class="blog-content hidden">
+            <div class="content-wrapper">
+                <button class="close-btn">✕</button>
+                <h2>👶 Gender Reveal: Momentos Mágicos</h2>
+                <div class="post-meta">
+                    <span class="date">Julio 2025</span>
+                    <span class="category">Eventos Especiales</span>
+                </div>
+                <div class="post-gallery">
+                    <img src="../img/blog/gender1.jpg" alt="Revelación de género">
+                    <img src="../img/blog/gender2.jpg" alt="Decoración de género">
+                    <img src="../img/blog/gender3.jpg" alt="Sorpresa de género">
+                </div>
+                <div class="post-content">
+                    <h3>¿Por qué elegir un Gender Reveal?</h3>
+                    <p>Las fiestas de revelación de género son una forma emocionante y creativa de compartir la noticia del sexo del bebé con amigos y familiares. Con nuestros paquetes, cada detalle está cubierto para que puedas disfrutar del momento sin preocupaciones.</p>
+                    
+                    <h3>Nuestros paquetes incluyen</h3>
+                    <ul>
+                        <li>Decoración temática (azul y rosa)</li>
+                        <li>Pastel sorpresa con el color del género</li>
+                        <li>Globos y pancartas personalizadas</li>
+                        <li>Photocall divertido</li>
+                        <li>Animación y juegos para los invitados</li>
+                    </ul>
+
+                    <h3>Opiniones de nuestros clientes</h3>
+                    <blockquote>
+                        <p>"Fue una sorpresa increíble para todos nuestros amigos y familiares. La decoración y el pastel eran espectaculares." - <cite>Laura y Juan</cite></p>
+                    </blockquote>
+
+                    <div class="cta-section">
+                        <h3>¡Haz de tu Gender Reveal un evento inolvidable!</h3>
+                        <p>Contáctanos para más información sobre nuestros paquetes y disponibilidad.</p>
+                        <a href="../html/reserva.html" class="cta-button">Más información</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <article class="blog-post" data-post-id="despedidas-originales">
+        <div class="blog-preview">
+            <img src="../img/blog/despedida.jpg" alt="Despedidas originales">
+            <h2>🥳 Despedidas Originales</h2>
+            <p class="preview-text">¡Olvídate de las despedidas tradicionales! Descubre nuestros castillos XXL para adultos, circuitos de 
+            obstáculos, fiestas temáticas y packs especiales.</p>
+            <button class="expand-btn">Leer más →</button>
+        </div>
+        <div class="blog-content hidden">
+            <div class="content-wrapper">
+                <button class="close-btn">✕</button>
+                <h2>🥳 Despedidas Originales</h2>
+                <div class="post-meta">
+                    <span class="date">Agosto 2025</span>
+                    <span class="category">Despedidas</span>
+                </div>
+                <div class="post-gallery">
+                    <img src="../img/blog/despedida1.jpg" alt="Despedida temática">
+                    <img src="../img/blog/despedida2.jpg" alt="Fiesta de despedida">
+                    <img src="../img/blog/despedida3.jpg" alt="Castillo XXL para adultos">
+                </div>
+                <div class="post-content">
+                    <h3>¿Por qué elegir una despedida original?</h3>
+                    <p>Las despedidas originales son una forma divertida y única de celebrar el final de una etapa. Con nuestros servicios, garantizamos una experiencia inolvidable, llena de risas y buenos momentos.</p>
+                    
+                    <h3>Nuestros servicios para despedidas incluyen</h3>
+                    <ul>
+                        <li>Castillos XXL para adultos</li>
+                        <li>Fiestas temáticas personalizadas</li>
+                        <li>Circuitos de obstáculos y juegos</li>
+                        <li>Animación y música en vivo</li>
+                        <li>Photocall divertido y recuerdos personalizados</li>
+                    </ul>
+
+                    <h3>Lo que dicen nuestros clientes</h3>
+                    <blockquote>
+                        <p>"La mejor despedida que podría haber imaginado. Todo fue perfecto, desde la decoración hasta la animación." - <cite>Carmen L.</cite></p>
+                    </blockquote>
+
+                    <div class="cta-section">
+                        <h3>¡Organiza una despedida que nunca olvidarán!</h3>
+                        <p>Contáctanos para más detalles sobre nuestros paquetes de despedidas originales.</p>
+                        <a href="../html/reserva.html" class="cta-button">Consultar paquetes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <article class="blog-post" data-post-id="comuniones-memorables">
+        <div class="blog-preview">
+            <img src="../img/blog/comunion.jpg" alt="Comuniones especiales">
+            <h2>✨ Comuniones Memorables</h2>
+            <p class="preview-text">Ideas para hacer de la comunión un día mágico: decoración personalizada, castillos temáticos, photocall, 
+            animación infantil y meriendas temáticas.</p>
+            <button class="expand-btn">Leer más →</button>
+        </div>
+        <div class="blog-content hidden">
+            <div class="content-wrapper">
+                <button class="close-btn">✕</button>
+                <h2>✨ Comuniones Memorables</h2>
+                <div class="post-meta">
+                    <span class="date">Septiembre 2025</span>
+                    <span class="category">Comuniones</span>
+                </div>
+                <div class="post-gallery">
+                    <img src="../img/blog/comunion1.jpg" alt="Decoración de comunión">
+                    <img src="../img/blog/comunion2.jpg" alt="Animación infantil">
+                    <img src="../img/blog/comunion3.jpg" alt="Merienda temática">
+                </div>
+                <div class="post-content">
+                    <h3>¿Cómo hacemos que una comunión sea memorable?</h3>
+                    <p>En Yupifiestas, nos especializamos en crear comuniones únicas y personalizadas. Desde la decoración hasta la animación, cada detalle se cuida para ofrecer una experiencia mágica e inolvidable.</p>
+                    
+                    <h3>Servicios destacados para comuniones</h3>
+                    <ul>
+                        <li>Castillos temáticos personalizados</li>
+                        <li>Decoración completa con el tema elegido</li>
+                        <li>Animación infantil profesional</li>
+                        <li>Photocall divertido y recuerdos para los invitados</li>
+                        <li>Meriendas temáticas adaptadas a todos los gustos</li>
+                    </ul>
+
+                    <h3>Testimonios</h3>
+                    <blockquote>
+                        <p>"La comunión de mi hija fue un sueño hecho realidad. Todo fue perfecto, gracias Yupifiestas." - <cite>Elena R.</cite></p>
+                    </blockquote>
+
+                    <div class="cta-section">
+                        <h3>¡Haz de la comunión de tu hijo/a un día inolvidable!</h3>
+                        <p>Contáctanos para más información sobre nuestros paquetes de comuniones.</p>
+                        <a href="../html/reserva.html" class="cta-button">Más información</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <article class="blog-post" data-post-id="fiestas-del-agua">
+        <div class="blog-preview">
+            <img src="../img/blog/water-party.jpg" alt="Fiesta del agua">
+            <h2>🌊 Fiestas del Agua</h2>
+            <p class="preview-text">Toboganes acuáticos, piscinas hinchables, juegos de agua y animación. La mejor opción para combatir el 
+            calor divirtiéndose en familia.</p>
+            <button class="expand-btn">Leer más →</button>
+        </div>
+        <div class="blog-content hidden">
+            <div class="content-wrapper">
+                <button class="close-btn">✕</button>
+                <h2>🌊 Fiestas del Agua</h2>
+                <div class="post-meta">
+                    <span class="date">Octubre 2025</span>
+                    <span class="category">Fiestas Acuáticas</span>
+                </div>
+                <div class="post-gallery">
+                    <img src="../img/blog/agua1.jpg" alt="Fiesta en la piscina">
+                    <img src="../img/blog/agua2.jpg" alt="Tobogán acuático">
+                    <img src="../img/blog/agua3.jpg" alt="Juegos de agua">
+                </div>
+                <div class="post-content">
+                    <h3>¿Por qué elegir una fiesta del agua?</h3>
+                    <p>Las fiestas del agua son perfectas para refrescarse y divertirse en los días calurosos. Ofrecemos una variedad de opciones acuáticas, desde toboganes hasta juegos de piscina, todo supervisado por profesionales.</p>
+                    
+                    <h3>Nuestras instalaciones acuáticas incluyen</h3>
+                    <ul>
+                        <li>Toboganes acuáticos de diferentes tamaños y niveles de dificultad</li>
+                        <li>Piscinas hinchables con áreas de juego</li>
+                        <li>Juegos de agua interactivos</li>
+                        <li>Animación y actividades acuáticas</li>
+                    </ul>
+
+                    <h3>Lo que opinan nuestros clientes</h3>
+                    <blockquote>
+                        <p>"Una experiencia increíble para toda la familia. Los niños se divirtieron muchísimo." - <cite>Pedro y Ana</cite></p>
+                    </blockquote>
+
+                    <div class="cta-section">
+                        <h3>¡No te pierdas nuestras fiestas del agua!</h3>
+                        <p>Consulta disponibilidad y precios para organizar una fiesta del agua inolvidable.</p>
+                        <a href="../html/reserva.html" class="cta-button">Consultar ahora</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <article class="blog-post" data-post-id="eventos-corporativos">
+        <div class="blog-preview">
+            <img src="../img/blog/corporate.jpg" alt="Eventos corporativos">
+            <h2>💼 Eventos Corporativos</h2>
+            <p class="preview-text">Haz que tu evento empresarial sea diferente: team building con castillos hinchables, olimpiadas corporativas 
+            y actividades grupales originales.</p>
+            <button class="expand-btn">Leer más →</button>
+        </div>
+        <div class="blog-content hidden">
+            <div class="content-wrapper">
+                <button class="close-btn">✕</button>
+                <h2>💼 Eventos Corporativos</h2>
+                <div class="post-meta">
+                    <span class="date">Noviembre 2025</span>
+                    <span class="category">Eventos Corporativos</span>
+                </div>
+                <div class="post-gallery">
+                    <img src="../img/blog/corporate1.jpg" alt="Team building con castillos hinchables">
+                    <img src="../img/blog/corporate2.jpg" alt="Olimpíadas corporativas">
+                    <img src="../img/blog/corporate3.jpg" alt="Actividades grupales originales">
+                </div>
+                <div class="post-content">
+                    <h3>¿Por qué elegirnos para tu evento corporativo?</h3>
+                    <p>En Yupifiestas, entendemos la importancia de los eventos corporativos. Ofrecemos soluciones personalizadas para cada empresa, asegurando que tu evento sea un éxito rotundo.</p>
+                    
+                    <h3>Servicios para eventos corporativos</h3>
+                    <ul>
+                        <li>Castillos hinchables para team building</li>
+                        <li>Olimpíadas corporativas con premios</li>
+                        <li>Actividades grupales para fomentar el trabajo en equipo</li>
+                        <li>Personalización de eventos según la temática de la empresa</li>
+                    </ul>
+
+                    <h3>Testimonios de empresas</h3>
+                    <blockquote>
+                        <p>"Yupifiestas transformó nuestro evento corporativo en una experiencia inolvidable. ¡Altamente recomendados!" - <cite>Empresa XYZ</cite></p>
+                    </blockquote>
+
+                    <div class="cta-section">
+                        <h3>¡Haz que tu evento corporativo destaque!</h3>
+                        <p>Contáctanos para más información sobre nuestros servicios para empresas.</p>
+                        <a href="../html/reserva.html" class="cta-button">Más información</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <article class="blog-post" data-post-id="fiestas-tematicas-especiales">
+        <div class="blog-preview">
+            <img src="../img/blog/halloween.jpg" alt="Fiestas temáticas">
+            <h2>🎃 Fiestas Temáticas Especiales</h2>
+            <p class="preview-text">Halloween, Carnaval, Fiestas del Terror, Navidad... Descubre nuestros eventos especiales con decoración y 
+            castillos adaptados a cada temporada.</p>
+            <button class="expand-btn">Leer más →</button>
+        </div>
+        <div class="blog-content hidden">
+            <div class="content-wrapper">
+                <button class="close-btn">✕</button>
+                <h2>🎃 Fiestas Temáticas Especiales</h2>
+                <div class="post-meta">
+                    <span class="date">Diciembre 2025</span>
+                    <span class="category">Fiestas Temáticas</span>
+                </div>
+                <div class="post-gallery">
+                    <img src="../img/blog/halloween1.jpg" alt="Fiesta de Halloween">
+                    <img src="../img/blog/halloween2.jpg" alt="Decoración de Halloween">
+                    <img src="../img/blog/halloween3.jpg" alt="Fiesta temática de Navidad">
+                </div>
+                <div class="post-content">
+                    <h3>¿Qué son las fiestas temáticas especiales?</h3>
+                    <p>Son eventos únicos que organizamos para celebrar fechas señaladas como Halloween, Navidad o Carnaval. Cada fiesta incluye decoración, actividades y sorpresas acordes a la temática.</p>
+                    
+                    <h3>Próximos eventos temáticos</h3>
+                    <ul>
+                        <li><strong>Halloween:</strong> Fiesta del Terror con castillos hinchables, decoración espeluznante y juegos de miedo.</li>
+                        <li><strong>Navidad:</strong> Mercadillo navideño, visita de Papá Noel y actividades infantiles.</li>
+                    </ul>
+
+                    <h3>Opiniones sobre nuestras fiestas temáticas</h3>
+                    <blockquote>
+                        <p>"La fiesta de Halloween fue increíble, muy bien organizada y con un montón de actividades para los niños." - <cite>Familia López</cite></p>
+                    </blockquote>
+
+                    <div class="cta-section">
+                        <h3>¡No te pierdas nuestras fiestas temáticas!</h3>
+                        <p>Suscríbete a nuestro boletín y sé el primero en enterarte de nuestros próximos eventos temáticos.</p>
+                        <a href="../html/reserva.html" class="cta-button">Suscribirse</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </article>
   </main>
   <!-- ======================== VIDEO PROMOCIONAL ======================== -->

@@ -194,66 +194,183 @@ header {
 }
 
 .blog-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 40px;
-  max-width: 1200px;
-  margin: 2rem auto 0;
-  padding: 0 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .blog-post {
-  background-color: #fff;
+  background: white;
   border-radius: 15px;
-  width: 300px;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
-  color: #333;
-  text-align: left;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
 }
 
-.blog-post:hover {
-  transform: scale(1.05);
+.blog-preview {
+  padding: 1rem;
 }
 
-.blog-post img {
+.blog-preview img {
   width: 100%;
-  height: 180px;
+  height: 200px;
   object-fit: cover;
+  border-radius: 10px;
 }
 
-.blog-post h3 {
-  font-size: 22px;
-  color: #6a0dad;
-  margin: 16px 16px 8px;
+.blog-post h2 {
+  padding: 1rem;
+  margin: 0;
+  font-size: 1.5rem;
+  color: #333;
 }
 
 .blog-post p {
-  padding: 0 16px 16px;
+  padding: 0 1rem;
+  color: #666;
   line-height: 1.6;
 }
 
 .blog-post a {
-  display: block;
-  text-align: right;
-  padding: 0 16px 16px;
-  color: #b621fe;
-  font-weight: bold;
+  display: inline-block;
+  margin: 1rem;
+  padding: 0.5rem 1rem;
+  color: #007bff;
   text-decoration: none;
-  transition: color 0.2s ease;
+  font-weight: bold;
+  transition: color 0.3s ease;
 }
 
 .blog-post a:hover {
-  color: #663dff;
+  color: #0056b3;
 }
 
+.blog-content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
 
+.blog-content.active {
+  opacity: 1;
+  visibility: visible;
+}
 
+.content-wrapper {
+  max-width: 1000px;
+  margin: 2rem auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  line-height: 1;
+  z-index: 1001;
+}
+
+.post-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.post-gallery img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.post-gallery img:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.post-content {
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+.post-meta {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+  color: #666;
+}
+
+.expand-btn {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0.5rem 0;
+  transition: color 0.3s ease;
+}
+
+.expand-btn:hover {
+  color: #0056b3;
+}
+
+.hidden {
+  display: none;
+}
+
+.cta-section {
+  background: #f8f9fa;
+  padding: 2rem;
+  border-radius: 10px;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 1rem;
+  transition: background 0.3s ease;
+}
+
+.cta-button:hover {
+  background: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .content-wrapper {
+        margin: 1rem;
+        padding: 1rem;
+    }
+    
+    .post-gallery {
+        grid-template-columns: 1fr;
+    }
+}
   
   
   
@@ -687,4 +804,3 @@ header {
   .social-btn.whatsapp:hover {
     background-color: #3ee37b;
   }
-  
