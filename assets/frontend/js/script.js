@@ -1,362 +1,254 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // ================= CONFIGURACIÓN =================
+    const CONFIG = {
+        API_URL: 'http://localhost:5000',
+        ADMIN_EMAIL: 'admin@yupifiestas.es',
+        CAROUSEL_INTERVAL: 5000
+    };
+
     // ================= UTILIDADES =================
-
-    // ================= MENÚ DESPLEGABLE =================
-    function initMenuToggle() {
-        const menuToggle = document.getElementById('menu-toggle');
-        const navLinks = document.getElementById('nav-links');
-
-        if (!menuToggle || !navLinks) return;
-
-        // Alternar visibilidad del menú
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            menuToggle.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
-        });
-
-        // Cerrar menú al hacer clic en un enlace (en móviles)
-        const closeMenu = () => {
-            navLinks.classList.remove('active');
-            menuToggle.textContent = '☰';
-        };
-
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', closeMenu);
-        });
-
-        // Cerrar menú si se redimensiona a escritorio
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                closeMenu();
+    const utils = {
+        playSound(url, volume = 0.1) {
+            try {
+                const sound = new Audio(url);
+                sound.volume = volume;
+                sound.play().catch(e => console.log('Audio no permitido automáticamente'));
+            } catch (e) {
+                console.log('Error al reproducir sonido:', e);
             }
-        });
-    }
+        },
 
-    function loadFontAwesome() {
-        if (!document.querySelector('link[href*="font-awesome"]')) {
-            const link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css';
-            document.head.appendChild(link);
+        animateElement(element, scale = 1.3, duration = 300) {
+            if (element) {
+                element.style.transform = `scale(${scale})`;
+                setTimeout(() => {
+                    element.style.transform = 'scale(1)';
+                }, duration);
+            }
         }
-    }
+    };
 
-    /**
-     * Reproduce un sonido de hover/efecto
-     */
-    function playHoverSound() {
-        try {
-            const sound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3');
-            sound.volume = 0.1;
-            sound.play().catch(e => console.log('Audio no permitido automáticamente'));
-        } catch (e) {
-            console.log('Error al reproducir sonido:', e);
-        }
-    }
+    // ================= INICIALIZADORES =================
+    const init = {
+        menuToggle() {
+            const menuToggle = document.getElementById('menu-toggle');
+            const navLinks = document.getElementById('nav-links');
 
-    /**
-     * Animación de escala para iconos
-     * @param {HTMLElement} icon - Elemento del icono a animar
-     */
-    function animateIcon(icon) {
-        if (icon) {
-            icon.style.transform = 'scale(1.3)';
-            setTimeout(() => {
-                icon.style.transform = 'scale(1)';
-            }, 300);
-        }
-    }
+            if (!menuToggle || !navLinks) return;
 
-    /**
-     * Inicializa botones sociales con efectos visuales
-     */
-    function initSocialButtons() {
-        const socialButtons = document.querySelectorAll('.social-btn');
-        socialButtons.forEach(button => {
-            button.addEventListener('click', function (e) {
-                e.preventDefault();
-                const wave = document.createElement('span');
-                wave.className = 'wave-effect';
-                wave.style.cssText = `
-                  position: absolute;
-                  border-radius: 50%;
-                  background-color: rgba(255, 255, 255, 0.4);
-                  pointer-events: none;
-                  transform: scale(0);
-                  animation: wave 0.6s linear;
-                  z-index: 0;
-              `;
-                const rect = button.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height) * 1.5;
-                wave.style.width = `${size}px`;
-                wave.style.height = `${size}px`;
-                wave.style.left = `${e.clientX - rect.left - size / 2}px`;
-                wave.style.top = `${e.clientY - rect.top - size / 2}px`;
-                button.appendChild(wave);
-
-                setTimeout(() => wave.remove(), 600);
-                setTimeout(() => window.open(button.href, '_blank'), 300);
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                menuToggle.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
             });
 
-            button.addEventListener('mouseenter', () => {
-                playHoverSound();
-                animateIcon(button.querySelector('i'));
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    menuToggle.textContent = '☰';
+                });
             });
-        });
-    }
+        },
 
-    /**
-     * Resalta la página actual en la navegación
-     */
-    function highlightCurrentPage() {
-        const currentPage = location.pathname.split('/').pop().replace('.html', '') || 'index';
-        document.querySelectorAll('#nav-links a').forEach(link => {
-            const linkPage = link.getAttribute('href').split('/').pop().replace('.html', '');
-            if (linkPage === currentPage || (currentPage === 'index' && linkPage === '')) {
-                link.classList.add('active');
-            }
-        });
-    }
+        carousel() {
+            const track = document.querySelector('.carousel-track');
+            if (!track) return;
 
-    /**
-     * Maneja los enlaces de contacto para scroll suave
-     */
-    function initContactoLinks() {
-        const basePath = window.location.pathname.endsWith('/index.html') || window.location.pathname.endsWith('/')
-            ? './' : '../';
-        document.querySelectorAll('a[href="#contacto"]').forEach(link => {
-            link.addEventListener('click', function (e) {
-                e.preventDefault();
-                const contacto = document.getElementById('contacto');
-                if (contacto) {
-                    contacto.scrollIntoView({ behavior: 'smooth' });
-                } else {
-                    window.location.href = `${basePath}index.html#contacto`;
+            const slides = Array.from(track.children);
+            const nextButton = document.querySelector('.carousel-button.next');
+            const prevButton = document.querySelector('.carousel-button.prev');
+            const dotsContainer = document.querySelector('.carousel-dots');
+            let currentIndex = 0;
+
+            // Crear indicadores
+            slides.forEach((_, index) => {
+                const dot = document.createElement('button');
+                dot.classList.add('carousel-dot');
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => moveToSlide(index));
+                dotsContainer?.appendChild(dot);
+            });
+
+            const moveToSlide = (index) => {
+                if (!track) return;
+                track.style.transform = `translateX(-${index * 100}%)`;
+                document.querySelector('.slide.active')?.classList.remove('active');
+                slides[index]?.classList.add('active');
+                document.querySelector('.carousel-dot.active')?.classList.remove('active');
+                dotsContainer?.children[index]?.classList.add('active');
+                currentIndex = index;
+            };
+
+            nextButton?.addEventListener('click', () => {
+                const nextIndex = (currentIndex + 1) % slides.length;
+                moveToSlide(nextIndex);
+            });
+
+            prevButton?.addEventListener('click', () => {
+                const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+                moveToSlide(prevIndex);
+            });
+
+            // Autoplay
+            setInterval(() => {
+                const nextIndex = (currentIndex + 1) % slides.length;
+                moveToSlide(nextIndex);
+            }, CONFIG.CAROUSEL_INTERVAL);
+        },
+
+        auth() {
+            const loginBtn = document.getElementById('login-btn');
+            const registerBtn = document.getElementById('register-btn');
+            const logoutBtn = document.getElementById('logout-btn');
+            const showRegister = document.getElementById('show-register');
+            const showLogin = document.getElementById('show-login');
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            const authContainer = document.getElementById('auth-container');
+            const userInfo = document.getElementById('user-info');
+            const userName = document.getElementById('user-name');
+            const userEmail = document.getElementById('user-email');
+
+            showRegister.addEventListener('click', () => {
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'block';
+            });
+
+            showLogin.addEventListener('click', () => {
+                registerForm.style.display = 'none';
+                loginForm.style.display = 'block';
+            });
+
+            loginBtn.addEventListener('click', async () => {
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+
+                try {
+                    const res = await fetch('http://localhost:5000/auth/login', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password })
+                    });
+                    const data = await res.json();
+
+                    if (!res.ok) {
+                        alert(data.message || 'Error al iniciar sesión');
+                        return;
+                    }
+
+                    sessionStorage.setItem('user', JSON.stringify(data.user));
+                    showUserInfo(data.user);
+
+                    if (data.user.email === CONFIG.ADMIN_EMAIL) {
+                        document.body.classList.add('admin');
+                    } else {
+                        document.body.classList.remove('admin');
+                    }
+
+                    window.location.href = "../../html/reservas.html"; // ajusta si es necesario
+
+                } catch (err) {
+                    alert('Error de conexión al servidor');
+                    console.error(err);
                 }
             });
-        });
-    }
 
-    // ================= FUNCIONALIDADES GLOBALES =================
+            registerBtn.addEventListener('click', async () => {
+                const email = document.getElementById('register-email').value;
+                const password = document.getElementById('register-password').value;
+                const confirmPassword = document.getElementById('register-confirm-password').value;
 
-    // Carrusel
-    const track = document.querySelector('.carousel-track');
-    const slides = Array.from(track.children);
-    const nextButton = document.querySelector('.carousel-button.next');
-    const prevButton = document.querySelector('.carousel-button.prev');
-    let currentIndex = 0;
+                if (password !== confirmPassword) {
+                    alert('Las contraseñas no coinciden');
+                    return;
+                }
 
-    // Configurar el carrusel
-    const slideWidth = slides[0].getBoundingClientRect().width;
-    slides.forEach((slide, index) => {
-        slide.style.left = slideWidth * index + 'px';
-    });
+                try {
+                    const res = await fetch('http://localhost:5000/auth/register', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password })
+                    });
 
-    // Función para mover las diapositivas
-    const moveToSlide = (index) => {
-        track.style.transform = `translateX(-${slideWidth * index}px)`;
-        currentIndex = index;
+                    const data = await res.json();
+                    if (!res.ok) {
+                        alert(data.message || 'Error en el registro');
+                        return;
+                    }
+
+                    alert('✅ Usuario registrado, ahora puedes iniciar sesión');
+                    showLogin.click();
+                } catch (err) {
+                    alert('Error de conexión al servidor');
+                    console.error(err);
+                }
+            });
+
+            logoutBtn.addEventListener('click', () => {
+                sessionStorage.removeItem('user');
+                location.reload();
+            });
+
+            const showUserInfo = (user) => {
+                authContainer.style.display = 'none';
+                userInfo.style.display = 'block';
+                userName.textContent = user.email;
+                userEmail.textContent = user.email;
+            };
+
+            // ✅ Detectar sesión activa desde sessionStorage
+            const storedUser = sessionStorage.getItem('user');
+            if (storedUser) {
+                const user = JSON.parse(storedUser);
+                showUserInfo(user);
+                if (user.email === CONFIG.ADMIN_EMAIL) {
+                    document.body.classList.add('admin');
+                }
+            }
+        }
     };
 
-    // Event listeners para los botones
-    nextButton.addEventListener('click', () => {
-        const nextIndex = (currentIndex + 1) % slides.length;
-        moveToSlide(nextIndex);
-    });
-
-    prevButton.addEventListener('click', () => {
-        const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
-        moveToSlide(prevIndex);
-    });
-
-    // Autoplay del carrusel
-    setInterval(() => {
-        const nextIndex = (currentIndex + 1) % slides.length;
-        moveToSlide(nextIndex);
-    }, 5000);
-
-    /**
-     * Lightbox para imágenes zoomables
-     */
-    const zoomables = document.querySelectorAll('.zoomable');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.querySelector('.lightbox-img');
-    const closeBtn = document.querySelector('.close-lightbox');
-
-    if (lightbox && lightboxImg && closeBtn) {
-        zoomables.forEach(img => {
-            img.addEventListener('click', () => {
-                lightboxImg.src = img.src;
-                lightbox.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
+    // ================= EVENTOS =================
+    function initEventListeners() {
+        // Videos
+        document.querySelectorAll('.evento-video, .pack-video').forEach(video => {
+            video.addEventListener('mouseenter', () => {
+                video.style.transform = 'scale(1.03)';
+                video.style.transition = 'transform 0.3s ease';
+            });
+            video.addEventListener('mouseleave', () => {
+                video.style.transform = 'scale(1)';
             });
         });
 
-        const closeLightbox = () => {
-            lightbox.classList.add('hidden');
-            lightboxImg.src = '';
-            document.body.style.overflow = '';
-        };
+        // Lightbox
+        const lightbox = document.getElementById('lightbox');
+        if (lightbox) {
+            document.querySelectorAll('.zoomable').forEach(img => {
+                img.addEventListener('click', () => {
+                    const lightboxImg = lightbox.querySelector('.lightbox-img');
+                    if (lightboxImg) {
+                        lightboxImg.src = img.src;
+                        lightbox.classList.remove('hidden');
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            });
 
-        closeBtn.addEventListener('click', closeLightbox);
-        lightbox.addEventListener('click', e => {
-            if (e.target === lightbox) closeLightbox();
-        });
+            lightbox.querySelector('.close-lightbox')?.addEventListener('click', () => {
+                lightbox.classList.add('hidden');
+                document.body.style.overflow = '';
+            });
+        }
     }
 
-    /**
-     * Animación de elementos al aparecer en el viewport
-     */
-    const elementosAnimables = document.querySelectorAll('.evento, .blog-post');
-    const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                obs.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-    elementosAnimables.forEach(el => observer.observe(el));
-
-    /**
-     * Efectos hover para videos
-     */
-    const videos = document.querySelectorAll('.evento-video, .pack-video');
-    videos.forEach(video => {
-        video.addEventListener('mouseenter', () => {
-            video.style.transform = 'scale(1.03)';
-            video.style.transition = 'transform 0.3s ease';
-        });
-        video.addEventListener('mouseleave', () => {
-            video.style.transform = 'scale(1)';
-        });
-    });
-
-
-    /**
-     * Efectos para tarjetas de castillos
-     */
-
-
-    // ================= INICIALIZAR FUNCIONES =================
-    initSocialButtons();
-    loadFontAwesome();
-    highlightCurrentPage();
-    initContactoLinks();
-    initMenuToggle();
-
-
-    // ==================== AUTENTICACIÓN CON MONGO ATLAS ====================
-
-    const loginBtn = document.getElementById('login-btn');
-    const registerBtn = document.getElementById('register-btn');
-    const logoutBtn = document.getElementById('logout-btn');
-    const showRegister = document.getElementById('show-register');
-    const showLogin = document.getElementById('show-login');
-    const loginForm = document.getElementById('login-form');
-    const registerForm = document.getElementById('register-form');
-    const authContainer = document.getElementById('auth-container');
-    const userInfo = document.getElementById('user-info');
-    const userName = document.getElementById('user-name');
-    const userEmail = document.getElementById('user-email');
-
-    const ADMIN_EMAIL = "admin@yupifiestas.es";
-
-    showRegister.addEventListener('click', () => {
-        loginForm.style.display = 'none';
-        registerForm.style.display = 'block';
-    });
-
-    showLogin.addEventListener('click', () => {
-        registerForm.style.display = 'none';
-        loginForm.style.display = 'block';
-    });
-
-    loginBtn.addEventListener('click', async () => {
-        const email = document.getElementById('login-email').value;
-        const password = document.getElementById('login-password').value;
-
-        try {
-            const res = await fetch('http://localhost:5000/auth/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password })
-            });
-            const data = await res.json();
-
-            if (!res.ok) {
-                alert(data.message || 'Error al iniciar sesión');
-                return;
-            }
-
-            sessionStorage.setItem('user', JSON.stringify(data.user));
-            showUserInfo(data.user);
-
-            if (data.user.email === ADMIN_EMAIL) {
-                document.body.classList.add('admin');
-            } else {
-                document.body.classList.remove('admin');
-            }
-
-            window.location.href = "../../html/reservas.html"; // ajusta si es necesario
-
-        } catch (err) {
-            alert('Error de conexión al servidor');
-            console.error(err);
-        }
-    });
-
-    registerBtn.addEventListener('click', async () => {
-        const email = document.getElementById('register-email').value;
-        const password = document.getElementById('register-password').value;
-        const confirmPassword = document.getElementById('register-confirm-password').value;
-
-        if (password !== confirmPassword) {
-            alert('Las contraseñas no coinciden');
-            return;
-        }
-
-        try {
-            const res = await fetch('http://localhost:5000/auth/register', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password })
-            });
-
-            const data = await res.json();
-            if (!res.ok) {
-                alert(data.message || 'Error en el registro');
-                return;
-            }
-
-            alert('✅ Usuario registrado, ahora puedes iniciar sesión');
-            showLogin.click();
-        } catch (err) {
-            alert('Error de conexión al servidor');
-            console.error(err);
-        }
-    });
-
-    logoutBtn.addEventListener('click', () => {
-        sessionStorage.removeItem('user');
-        location.reload();
-    });
-
-    const showUserInfo = (user) => {
-        authContainer.style.display = 'none';
-        userInfo.style.display = 'block';
-        userName.textContent = user.email;
-        userEmail.textContent = user.email;
-    };
-
-    // ✅ Detectar sesión activa desde sessionStorage
-    const storedUser = sessionStorage.getItem('user');
-    if (storedUser) {
-        const user = JSON.parse(storedUser);
-        showUserInfo(user);
-        if (user.email === ADMIN_EMAIL) {
-            document.body.classList.add('admin');
-        }
+    // ================= INICIALIZACIÓN =================
+    function initialize() {
+        init.menuToggle();
+        init.carousel();
+        init.auth();
+        initEventListeners();
     }
+
+    initialize();
 });
 
