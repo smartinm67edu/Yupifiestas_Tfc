@@ -15,7 +15,6 @@ class AuthService {
 
     async register(email, password) {
         try {
-            console.log('Intentando registrar usuario:', { email });
             const response = await fetch(`${this.baseUrl}/auth/register`, {
                 method: 'POST',
                 headers: {
@@ -28,10 +27,9 @@ class AuthService {
             });
 
             const data = await response.json();
-            console.log('Respuesta del servidor:', data);
 
             if (!response.ok) {
-                throw new Error(data.message || 'Error en el registro');
+                throw new Error(data.message);
             }
 
             this.token = data.token;
@@ -40,8 +38,7 @@ class AuthService {
 
             return data;
         } catch (error) {
-            console.error('Error detallado en registro:', error);
-            throw error;
+            throw new Error(error.message || 'Error en el registro');
         }
     }
 
