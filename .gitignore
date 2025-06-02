@@ -95,7 +95,78 @@ Este proyecto ha sido desarrollado por un estudiante como parte de un trabajo fi
 Para el correcto funcionamiento de la aplicación, asegúrate de que los siguientes archivos y carpetas estén ignorados en tu repositorio Git:
 
 ```
-.env
+# Dependencias
 node_modules/
+package-lock.json
+yarn.lock
+
+# Variables de entorno
+.env
+.env.local
+.env.*.local
+
+# Archivos de construcción
+dist/
+build/
+public/
+
+# Registros y logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos específicos del IDE
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Archivos multimedia
+assets/frontend/img/castillos/**/*.mp4
+assets/frontend/img/eventos/**/*.jpg
+assets/frontend/img/logos/**/*.jpg
+!assets/frontend/img/placeholders/
+
+# Base de datos
+*.sqlite
+*.db
+
+# Archivos de pruebas
+coverage/
+.nyc_output/
+
+# Archivos temporales
+*.tmp
+*.temp
+.cache/
+
+# Específicos del backend
+backend/uploads/
+backend/tmp/
+
+# Específicos del frontend
+frontend/dist/
+frontend/.cache/
+
+# Varios
+*.bak
+*.swp
+*.swo
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 ```
 
