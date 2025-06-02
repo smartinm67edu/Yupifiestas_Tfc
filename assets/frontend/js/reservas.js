@@ -56,17 +56,26 @@ class ReservasManager {
             const tbody = document.getElementById('eventosTableBody');
             tbody.innerHTML = eventos.map(evento => `
                 <tr>
-                    <td>${evento._id}</td>
                     <td>${evento.descripcion}</td>
-                    <td>${evento.castillos.length} castillos</td>
                     <td>${evento.precio}€</td>
                     <td>
-                        <button class="btn btn-sm btn-primary">Reservar</button>
+                        <button class="btn btn-sm btn-primary" onclick="reservarEvento('${evento._id}')">
+                            <i class="fas fa-calendar-plus me-1"></i>Reservar
+                        </button>
                     </td>
                 </tr>
             `).join('');
         } catch (error) {
             console.error('Error loading eventos:', error);
+            const tbody = document.getElementById('eventosTableBody');
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="3" class="text-center text-danger">
+                        <i class="fas fa-exclamation-circle me-2"></i>
+                        Error al cargar los eventos
+                    </td>
+                </tr>
+            `;
         }
     }
 
