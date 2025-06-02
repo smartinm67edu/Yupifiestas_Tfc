@@ -32,17 +32,24 @@ header {
 }
 
 .logo-title img {
-  width: 4.125rem;
-  height: 4.125rem;
-  border-radius: 0.625rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.logo-title img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
 }
 
 .logo-title h4 {
   color: #fff;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   margin: 0;
 }
 
@@ -233,15 +240,19 @@ header {
 }
 
 .evento-info h2 {
-  font-size: 2rem;
-  color: #800080;
-  margin-bottom: 1rem;
+  font-size: 2.2rem;
+  color: #6a0dad;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .evento-info p {
   font-size: 1.1rem;
-  margin-bottom: 1rem;
-  line-height: 1.6;
+  color: #333;
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+  font-weight: 400;
 }
 
 .evento-info ul {
@@ -251,12 +262,12 @@ header {
 }
 
 .evento-info ul li {
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
-}
-
-.evento-info ul li::before {
-  margin-right: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: #444;
+  padding-left: 2rem;
+  position: relative;
+  line-height: 1.6;
 }
 
 /* Carrusel pequeño con efecto hover */
@@ -265,9 +276,11 @@ header {
 }
 
 .evento-carrusel h3 {
-  font-size: 1.4rem;
-  color: #800080;
-  margin-bottom: 1rem;
+  font-size: 1.6rem;
+  color: #6a0dad;
+  margin: 2rem 0 1.5rem;
+  font-weight: 600;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .carousel-pequeno {
@@ -859,4 +872,84 @@ header {
   .social-btn.whatsapp:hover {
     background-color: #3ee37b;
   }
+  .contact-info {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+}
+
+.contact-item i {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    padding: 0.5rem;
+}
+
+.contact-item span {
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .contact-info {
+        align-items: center;
+    }
+}
+
+/* ======================== EVENT TITLE ======================== */
+.event-title-container {
+  text-align: center;
+
+}
+
+.event-title-container h1 {
+  font-size: 2.5rem;
+  color: #6a0dad;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(106, 13, 173, 0.1);
+}
+
+.event-title-container p {
+  font-size: 1.2rem;
+  color: #666;
+  font-weight: 300;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .event-title-container {
+    padding: 2rem 1rem;
+  }
+
+  .event-title-container h1 {
+    font-size: 2rem;
+  }
   
+  .event-title-container p {
+    font-size: 1rem;
+  }
+}

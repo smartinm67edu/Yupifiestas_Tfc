@@ -113,7 +113,7 @@
                 <div class="tab-pane fade" id="eventos" role="tabpanel">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h2 class="h4 text-primary">
-                            <i class="fas fa-calendar-alt me-2"></i>Eventos Programados
+                            <i class="fas fa-calendar-alt me-2"></i>Eventos Disponibles
                         </h2>
                         <button id="refreshEventosBtn" class="btn btn-primary">
                             <i class="fas fa-sync-alt me-1"></i> Actualizar
@@ -126,17 +126,16 @@
                                 <table class="table table-hover">
                                     <thead class="table-light">
                                         <tr>
-                                            <th>Fecha</th>
-                                            <th>Cliente</th>
-                                            <th>Dirección</th>
+                                            <th>ID</th>
+                                            <th>Descripción</th>
                                             <th>Castillos</th>
-                                            <th>Pack</th>
-                                            <th>Estado</th>
+                                            <th>Precio</th>
+                                            <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody id="eventosTableBody">
                                         <tr>
-                                            <td colspan="6" class="text-center py-5">
+                                            <td colspan="5" class="text-center py-5">
                                                 <div class="spinner-border text-primary" role="status">
                                                     <span class="visually-hidden">Cargando...</span>
                                                 </div>

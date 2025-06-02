@@ -7,6 +7,7 @@
   <title>Blog - Yupifiestas</title>
   <link rel="stylesheet" href="../css/blog.css">
   <script src="../js/blog.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
@@ -33,6 +34,13 @@
       </nav>
     </div>
   </header>
+  <!-- Add title section -->
+  <section class="blog-title-section">
+    <div class="title-container">
+      <h1>Blog de Yupifiestas</h1>
+      <p>Descubre las últimas tendencias en fiestas y eventos</p>
+    </div>
+  </section>
   <main class="blog-container">
     <article class="blog-post" data-post-id="cumpleanos">
         <div class="blog-preview">
@@ -79,7 +87,7 @@
                     <div class="cta-section">
                         <h3>¿Listo para crear una fiesta mágica?</h3>
                         <p>Contacta con nosotros y te ayudaremos a planificar cada detalle.</p>
-                        <a href="../html/reserva.html" class="cta-button">Reservar ahora</a>
+                        <a href="../html/login.html" class="cta-button">Reservar ahora</a>
                     </div>
                 </div>
             </div>
@@ -126,7 +134,7 @@
                     <div class="cta-section">
                         <h3>¡No te quedes sin tu fiesta de la espuma!</h3>
                         <p>Reserva ahora y asegura la fecha de tu evento.</p>
-                        <a href="../html/reserva.html" class="cta-button">Consultar disponibilidad</a>
+                        <a href="../html/login.html" class="cta-button">Consultar disponibilidad</a>
                     </div>
                 </div>
             </div>
@@ -175,7 +183,7 @@
                     <div class="cta-section">
                         <h3>¡Haz de tu Gender Reveal un evento inolvidable!</h3>
                         <p>Contáctanos para más información sobre nuestros paquetes y disponibilidad.</p>
-                        <a href="../html/reserva.html" class="cta-button">Más información</a>
+                        <a href="../html/login.html" class="cta-button">Más información</a>
                     </div>
                 </div>
             </div>
@@ -224,7 +232,7 @@
                     <div class="cta-section">
                         <h3>¡Organiza una despedida que nunca olvidarán!</h3>
                         <p>Contáctanos para más detalles sobre nuestros paquetes de despedidas originales.</p>
-                        <a href="../html/reserva.html" class="cta-button">Consultar paquetes</a>
+                        <a href="../html/login.html" class="cta-button">Consultar paquetes</a>
                     </div>
                 </div>
             </div>
@@ -273,7 +281,7 @@
                     <div class="cta-section">
                         <h3>¡Haz de la comunión de tu hijo/a un día inolvidable!</h3>
                         <p>Contáctanos para más información sobre nuestros paquetes de comuniones.</p>
-                        <a href="../html/reserva.html" class="cta-button">Más información</a>
+                        <a href="../html/login.html" class="cta-button">Más información</a>
                     </div>
                 </div>
             </div>
@@ -321,7 +329,7 @@
                     <div class="cta-section">
                         <h3>¡No te pierdas nuestras fiestas del agua!</h3>
                         <p>Consulta disponibilidad y precios para organizar una fiesta del agua inolvidable.</p>
-                        <a href="../html/reserva.html" class="cta-button">Consultar ahora</a>
+                        <a href="../html/login.html" class="cta-button">Consultar ahora</a>
                     </div>
                 </div>
             </div>
@@ -369,7 +377,7 @@
                     <div class="cta-section">
                         <h3>¡Haz que tu evento corporativo destaque!</h3>
                         <p>Contáctanos para más información sobre nuestros servicios para empresas.</p>
-                        <a href="../html/reserva.html" class="cta-button">Más información</a>
+                        <a href="../html/login.html" class="cta-button">Más información</a>
                     </div>
                 </div>
             </div>
@@ -415,7 +423,7 @@
                     <div class="cta-section">
                         <h3>¡No te pierdas nuestras fiestas temáticas!</h3>
                         <p>Suscríbete a nuestro boletín y sé el primero en enterarte de nuestros próximos eventos temáticos.</p>
-                        <a href="../html/reserva.html" class="cta-button">Suscribirse</a>
+                        <a href="../html/login.html" class="cta-button">Suscribirse</a>
                     </div>
                 </div>
             </div>
@@ -433,32 +441,34 @@
       <div class="promotionInfo">
         <h2>¿Necesitas más información?</h2>
         <p>Consulta todos nuestros precios y ofertas exclusivas para eventos.</p>
-        <a href="#contacto" class="btn btn-primary">Reservanos</a>
+        <a href="../html/login.html" class="btn btn-primary">Reservanos</a>
       </div>
     </div>
   </section>
 
+  
   <footer id="contacto" class="footer">
     <div class="footer-container">
 
       <!-- Información -->
       <div class="footer-info">
         <h3>🎉 Yupifiestas</h3>
-        <p>Alquiler de castillos hinchables para cualquier tipo de evento: cumpleaños, comuniones, despedidas y más.
-        </p>
-        <p>📍 Ciudad, País</p>
-        <p>📧 <a href="mailto:info@yupifiestas.es">info@yupifiestas.es</a></p>
-        <p>📞 <a href="tel:+123456789">+12 345 6789</a></p>
+        <div class="map-container">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12284.063766621684!2d-5.667176244773645!3d40.12661839479244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd3fe1e959e492cd%3A0x892cf349da78301b!2s10450%20Jarandilla%20de%20la%20Vera%2C%20C%C3%A1ceres!5e0!3m2!1ses!2ses!4v1699532462039!5m2!1ses!2ses"
+            width="100%" height="200" style="border:0; border-radius:8px;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
       </div>
 
       <!-- Menú -->
       <div class="footer-links">
         <h3>Reservas</h3>
         <ul>
-          <li><a href="#packs">Ver Packs Disponibles</a></li>
-          <li><a href="#castillos">Catálogo de Castillos</a></li>
-          <li><a href="#promociones">Ofertas y Promociones</a></li>
-          <li><a href="#contacto">Atención al Cliente</a></li>
+          <li><a href="../html/packs.html">Ver Packs Disponibles</a></li>
+          <li><a href="../html/castillos.html">Catálogo de Castillos</a></li>
+          <li><a href="../html/event.html">Ofertas y Promociones en eventos</a></li>
         </ul>
       </div>
 
@@ -482,9 +492,15 @@
             <i class="fab fa-twitter"></i>
             <span class="social-tooltip">Twitter</span>
           </a>
-          <a href="mailto:correo@ejemplo.com" class="social-btn email" target="_blank" aria-label="Email">
+        </div>
+        <div class="contact-info">
+          <a href="mailto:info@yupifiestas.es" class="contact-item">
             <i class="fas fa-envelope"></i>
-            <span class="social-tooltip">Email</span>
+            <span>info@yupifiestas.es</span>
+          </a>
+          <a href="tel:+123456789" class="contact-item">
+            <i class="fas fa-phone"></i>
+            <span>+12 345 6789</span>
           </a>
         </div>
       </div>
