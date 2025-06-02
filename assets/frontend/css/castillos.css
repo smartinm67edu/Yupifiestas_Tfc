@@ -175,16 +175,15 @@
   .castillos-section {
     width: 100%;
     min-height: 100vh;
-    padding: 4rem 0;
-    background: radial-gradient(
-      ellipse at center,
-      #ffffff 0%,
-      #f8f0fc 50%,
-      #ecd9f9 80%,
-      #e3c3f9 100%
+    padding: 4rem 2rem;
+    background: linear-gradient(
+        135deg,
+        #ffffff 0%,
+        #f8f5ff 25%,
+        #f0ebff 50%,
+        #ede6ff 75%,
+        #e8e0ff 100%
     );
-    z-index: 0;
-    position: relative;
   }
   
   .castillos {
@@ -237,23 +236,25 @@
 }
 
 .lista-castillos {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
 }
 
 .castillo-card {
-    background: white;
-    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(106, 13, 173, 0.1);
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    display: flex;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s ease;
 }
 
 .castillo-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+    box-shadow: 0 8px 20px rgba(106, 13, 173, 0.15);
 }
 
 .castillo-card.destacado {
@@ -829,4 +830,3 @@
   .social-btn.whatsapp:hover {
     background-color: #3ee37b;
   }
-  
