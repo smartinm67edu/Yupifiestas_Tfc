@@ -7,10 +7,10 @@
   <title>Blog - Yupifiestas</title>
   <link rel="stylesheet" href="assets/frontend/css/index.css">
   <script src="assets/frontend/js/script.js" defer></script>
-  
 </head>
 
 <body>
+  <!-- Cabecera -->
   <header>
     <div class="header-window">
       <div class="container-header">
@@ -35,36 +35,41 @@
     </div>
   </header>
 
-  <!-- 
+  <!-- Carrusel de portada mejorado -->
   <div class="container-portada-carrusel">
     <div class="carousel-wrapper">
-      <div class="carousel-track">
-        <div class="slide"><img src="/mnt/data/castillo_ejemplo.webp" alt=""></div>
-        <div class="slide" style="background-image: url('/mnt/data/castillo_ejemplo.webp');"></div>
-        <div class="slide" style="background-image: url('/mnt/data/castillo_ejemplo.webp');"></div>
-      </div>
-    </div>
-
-    <div class="capa-gradient"></div>
-
-    <div class="container-details">
-      <h1>Yupifiestas</h1>
-      <p>Alquiler de Castillos Hinchables para cualquier tipo de evento</p>
+        <div class="carousel-track">
+            <div class="slide">
+                <img src="assets/frontend/img/castillos/barredora.jpeg" alt="Castillo hinchable 1">
+            </div>
+            <div class="slide">
+                <img src="assets/frontend/img/castillos/ladybug.webp" alt="Castillo hinchable 2">
+            </div>
+            <div class="slide">
+                <img src="assets/frontend/img/castillos/bugs.jpg" alt="Castillo hinchable 3">
+            </div>
+            <div class="slide">
+                <img src="assets/frontend/img/castillos/patrulla.webp" alt="Castillo hinchable 4">
+            </div>
+            <div class="slide">
+                <img src="assets/frontend/img/castillos/frozen.jpg" alt="Castillo hinchable 5">
+            </div>  
+        </div>
+        <button class="carousel-button prev" aria-label="Anterior">❮</button>
+        <button class="carousel-button next" aria-label="Siguiente">❯</button>
     </div>
   </div>
- -->
 
-
-  <!-- ======================== CASTILLOS HINCHABLES ======================== -->
+  <!-- ======================== SECCIÓN DE CASTILLOS HINCHABLES ======================== -->
   <section id="castillos" class="castillos-section">
     <div class="container">
       <h2 class="section-title">Castillos Hinchables</h2>
       <p class="section-subtitle">¡Descubre nuestros castillos hinchables más divertidos para todo tipo de fiestas!</p>
       <div class="castillos-grid">
-        <!-- Patrulla Canina -->
+        <!-- Castillo Patrulla Canina -->
         <a href="assets/frontend/html/castillos.html#patrulla-canina" class="castillo-card" data-category="infantiles">
           <div class="card-image">
-            <img src="mnt/data/castillo_ejemplo.webp" alt="Castillo Infantil">
+            <img src="assets/frontend/img/castillos/patrulla.webp" alt="Castillo Infantil">
             <div class="card-overlay">
               <button class="ver-btn">Ver Detalles</button>
             </div>
@@ -78,10 +83,10 @@
           </div>
         </a>
 
-        <!-- Ladybug -->
+        <!-- Castillo Ladybug -->
         <a href="assets/frontend/html/castillos.html#ladybug" class="castillo-card" data-category="superheroes">
           <div class="card-image">
-            <img src="mnt/data/castillo_ejemplo.webp" alt="Castillo de Superhéroes">
+            <img src="assets/frontend/img/castillos/ladybug.webp" alt="Castillo de Superhéroes">
             <div class="card-overlay">
               <button class="ver-btn">Ver Detalles</button>
             </div>
@@ -95,9 +100,10 @@
           </div>
         </a>
         
+        <!-- Castillo Mario Bros -->
         <a href="assets/frontend/html/castillos.html#mario-bros" class="castillo-card" data-category="peliculas">
           <div class="card-image">
-            <img src="mnt/data/castillo_ejemplo.webp" alt="Castillo de Película">
+            <img src="assets/frontend/img/castillos/mario.jpg" alt="Castillo de Película">
             <div class="card-overlay">
               <button class="ver-btn">Ver Detalles</button>
             </div>
@@ -111,9 +117,10 @@
           </div>
         </a>
         
+        <!-- Castillo La Barredora -->
         <a href="assets/frontend/html/castillos.html#barredora" class="castillo-card" data-category="grandes">
           <div class="card-image">
-            <img src="mnt/data/castillo_ejemplo.webp" alt="Castillo Grande">
+            <img src="assets/frontend/img/castillos/barredora.jpeg" alt="Castillo Grande">
             <div class="card-overlay">
               <button class="ver-btn">Ver Detalles</button>
             </div>
@@ -127,15 +134,16 @@
           </div>
         </a>
         
-        <a href="assets/frontend/html/castillos.html#bugs-bonie" class="castillo-card" data-category="infantiles">
+        <!-- Castillo bugs bunny -->
+        <a href="assets/frontend/html/castillos.html#bugs-bunny" class="castillo-card" data-category="infantiles">
           <div class="card-image">
-            <img src="mnt/data/castillo_ejemplo.webp" alt="Castillo Infantil 2">
+            <img src="assets/frontend/img/castillos/bugs.jpg" alt="Castillo Infantil 2">
             <div class="card-overlay">
               <button class="ver-btn">Ver Detalles</button>
             </div>
           </div>
           <div class="card-info">
-            <h3>Bugs Bonie</h3>
+            <h3>Bugs Bunny</h3>
             <div class="card-meta">
               <span class="meta-item">👶 3-10 años</span>
               <span class="meta-item">📏 5x5m</span>
@@ -143,9 +151,10 @@
           </div>
         </a>
         
+        <!-- Castillo Frozen -->
         <a href="assets/frontend/html/castillos.html#frozen" class="castillo-card" data-category="superheroes">
           <div class="card-image">
-            <img src="mnt/data/castillo_ejemplo.webp" alt="Castillo de Superhéroes 2">
+            <img src="assets/frontend/img/castillos/frozen.jpg" alt="Castillo de Superhéroes 2">
             <div class="card-overlay">
               <button class="ver-btn">Ver Detalles</button>
             </div>
@@ -167,12 +176,12 @@
     </div>
   </section>
 
-  <!-- ======================== PACKS ======================== -->
+  <!-- ======================== SECCIÓN DE PACKS ======================== -->
   <div id="packs" class="packs">
     <h2>Nuestros Packs</h2>
     <div class="packs-container">
 
-      <!-- 🎉 Cumpleaños -->
+      <!-- Pack Cumpleaños -->
       <a href="assets/frontend/html/packs.html#pack-cumple">
         <div class="pack">
           <video autoplay muted loop playsinline class="pack-video">
@@ -182,7 +191,7 @@
         </div>
       </a>
 
-      <!-- 🎭 Despedidas -->
+      <!-- Pack Despedidas -->
       <a href="assets/frontend/html/packs.html#pack-despedida">
         <div class="pack">
           <video autoplay muted loop playsinline class="pack-video">
@@ -192,7 +201,7 @@
         </div>
       </a>
 
-      <!-- 🎪 Fiestas -->
+      <!-- Pack Fiestas Temáticas -->
       <a href="assets/frontend/html/packs.html#pack-tematica">
         <div class="pack">
           <video autoplay muted loop playsinline class="pack-video">
@@ -202,7 +211,7 @@
         </div>
       </a>
 
-      <!-- 🍼 Gender Reveal -->
+      <!-- Pack Gender Reveal -->
       <a href="assets/frontend/html/packs.html#pack-gender">
         <div class="pack">
           <video autoplay muted loop playsinline class="pack-video">
@@ -212,7 +221,7 @@
         </div>
       </a>
 
-      <!-- 🤠 Toro Mecánico -->
+      <!-- Pack Toro Mecánico -->
       <a href="assets/frontend/html/packs.html#pack-toro">
         <div class="pack">
           <video autoplay muted loop playsinline class="pack-video">
@@ -222,7 +231,7 @@
         </div>
       </a>
 
-      <!-- 🏎️ Carreras Cars -->
+      <!-- Pack Carreras Cars -->
       <a href="assets/frontend/html/packs.html#pack-cars">
         <div class="pack">
           <video autoplay muted loop playsinline class="pack-video">
@@ -232,7 +241,7 @@
         </div>
       </a>
 
-      <!-- 💦 Eventos Acuáticos -->
+      <!-- Pack Eventos Acuáticos -->
       <a href="assets/frontend/html/packs.html#pack-acuaticos">
         <div class="pack">
           <video autoplay muted loop playsinline class="pack-video">
@@ -242,7 +251,7 @@
         </div>
       </a>
 
-      <!-- 🏖️ Piscinas -->
+      <!-- Pack Fiesta de la Espuma -->
       <a href="assets/frontend/html/packs.html#pack-espuma">
         <div class="pack">
           <video autoplay muted loop playsinline class="pack-video">
@@ -255,7 +264,7 @@
 
     </div>
   </div>
-  <!-- ======================== VIDEO PROMOCIONAL ======================== -->
+  <!-- ======================== SECCIÓN DE VIDEO PROMOCIONAL ======================== -->
   <section class="promotionWrapper">
     <video autoplay muted loop class="video-background">
       <source src="assets/frontend/img/castillos/video_castillo1.mp4" type="video/mp4">
@@ -270,10 +279,12 @@
       </div>
     </div>
   </section>
+
+  <!-- Pie de página -->
   <footer id="contacto" class="footer">
     <div class="footer-container">
 
-      <!-- Información -->
+      <!-- Sección de Información -->
       <div class="footer-info">
         <h3>🎉 Yupifiestas</h3>
         <p>Alquiler de castillos hinchables para cualquier tipo de evento: cumpleaños, comuniones, despedidas y más.
@@ -283,7 +294,7 @@
         <p>📞 <a href="tel:+123456789">+12 345 6789</a></p>
       </div>
 
-      <!-- Menú -->
+      <!-- Sección de Menú -->
       <div class="footer-links">
         <h3>Reservas</h3>
         <ul>
@@ -293,7 +304,7 @@
         </ul>
       </div>
 
-      <!-- Reemplaza la sección de redes sociales con esto: -->
+      <!-- Sección de Redes Sociales -->
       <div class="footer-social">
         <h3>Síguenos</h3>
         <div class="social-buttons">
@@ -322,8 +333,10 @@
 
     </div>
 
+    <!-- Efecto de olas -->
     <div class="waves"></div>
 
+    <!-- Texto de copyright -->
     <div class="footer-bottom">
       &copy; 2025 <strong>Yupifiestas</strong> · Todos los derechos reservados
     </div>

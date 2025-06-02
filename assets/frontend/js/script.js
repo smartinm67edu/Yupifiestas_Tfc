@@ -139,27 +139,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ================= FUNCIONALIDADES GLOBALES =================
 
-    /**
-     * Carousel functionality
-     */
+    // Carrusel
     const track = document.querySelector('.carousel-track');
-    const nextBtn = document.querySelector('.carousel-btn.next');
-    const prevBtn = document.querySelector('.carousel-btn.prev');
-    let carouselIndex = 0;
+    const slides = Array.from(track.children);
+    const nextButton = document.querySelector('.carousel-button.next');
+    const prevButton = document.querySelector('.carousel-button.prev');
+    let currentIndex = 0;
 
-    if (track && nextBtn && prevBtn) {
-        const updateCarousel = () => {
-            track.style.transform = `translateX(-${carouselIndex * 100}%)`;
-        };
-        nextBtn.addEventListener('click', () => {
-            carouselIndex = (carouselIndex + 1) % track.children.length;
-            updateCarousel();
-        });
-        prevBtn.addEventListener('click', () => {
-            carouselIndex = (carouselIndex - 1 + track.children.length) % track.children.length;
-            updateCarousel();
-        });
-    }
+    // Configurar el carrusel
+    const slideWidth = slides[0].getBoundingClientRect().width;
+    slides.forEach((slide, index) => {
+        slide.style.left = slideWidth * index + 'px';
+    });
+
+    // Función para mover las diapositivas
+    const moveToSlide = (index) => {
+        track.style.transform = `translateX(-${slideWidth * index}px)`;
+        currentIndex = index;
+    };
+
+    // Event listeners para los botones
+    nextButton.addEventListener('click', () => {
+        const nextIndex = (currentIndex + 1) % slides.length;
+        moveToSlide(nextIndex);
+    });
+
+    prevButton.addEventListener('click', () => {
+        const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+        moveToSlide(prevIndex);
+    });
+
+    // Autoplay del carrusel
+    setInterval(() => {
+        const nextIndex = (currentIndex + 1) % slides.length;
+        moveToSlide(nextIndex);
+    }, 5000);
 
     /**
      * Lightbox para imágenes zoomables
