@@ -9,8 +9,21 @@ class ReservasManager {
             return;
         }
 
+        // Mostrar el email del usuario
+        this.displayUserEmail();
+        
         this.setupEventListeners();
         await this.loadAllData();
+    }
+
+    displayUserEmail() {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user && user.email) {
+            const userEmailElement = document.getElementById('user-email');
+            if (userEmailElement) {
+                userEmailElement.textContent = user.email;
+            }
+        }
     }
 
     setupEventListeners() {

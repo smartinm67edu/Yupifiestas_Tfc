@@ -24,10 +24,21 @@ class AuthService {
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
             
+            // Actualizar el email del usuario en la interfaz
+            this.updateUserDisplay();
+            
             return data;
         } catch (error) {
             console.error('Error en login:', error);
             throw error;
+        }
+    }
+
+    updateUserDisplay() {
+        const userEmail = document.getElementById('user-email');
+        if (userEmail) {
+            const user = JSON.parse(localStorage.getItem('user'));
+            userEmail.textContent = user ? user.email : '';
         }
     }
 
