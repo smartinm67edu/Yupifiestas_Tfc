@@ -1,12 +1,12 @@
 class AuthService {
     constructor() {
-        this.apiUrl = 'http://localhost:5000/api';
+        this.baseUrl = 'http://localhost:5000/api';
         this.token = localStorage.getItem('token');
     }
 
     async login(email, password) {
         try {
-            const response = await fetch(`${this.apiUrl}/auth/login`, {
+            const response = await fetch(`${this.baseUrl}/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -15,11 +15,11 @@ class AuthService {
             });
 
             const data = await response.json();
+
             if (!response.ok) {
                 throw new Error(data.message || 'Error en el login');
             }
 
-            // Guardar token y datos del usuario
             this.token = data.token;
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
@@ -27,65 +27,6 @@ class AuthService {
             return data;
         } catch (error) {
             console.error('Error en login:', error);
-            throw error;
-        }
-    }
-
-    async loadCastillos() {
-        try {
-            const response = await fetch(`${this.apiUrl}/castillos`, {
-                headers: {
-                    'Authorization': `Bearer ${this.token}`,
-                    'Content-Type': 'application/json'
-                }
-            });
-
-            if (!response.ok) {
-                const error = await response.json();
-                throw new Error(error.message || 'Error al cargar castillos');
-            }
-
-            return await response.json();
-        } catch (error) {
-            console.error('Error cargando castillos:', error);
-            throw error;
-        }
-    }
-
-    async loadEventos() {
-        try {
-            const response = await fetch(`${this.apiUrl}/eventos`, {
-                headers: {
-                    'Authorization': `Bearer ${this.token}`
-                }
-            });
-
-            if (!response.ok) {
-                throw new Error('Error al cargar eventos');
-            }
-
-            return await response.json();
-        } catch (error) {
-            console.error('Error cargando eventos:', error);
-            throw error;
-        }
-    }
-
-    async loadPacks() {
-        try {
-            const response = await fetch(`${this.apiUrl}/packs`, {
-                headers: {
-                    'Authorization': `Bearer ${this.token}`
-                }
-            });
-
-            if (!response.ok) {
-                throw new Error('Error al cargar packs');
-            }
-
-            return await response.json();
-        } catch (error) {
-            console.error('Error cargando packs:', error);
             throw error;
         }
     }
@@ -100,7 +41,14 @@ class AuthService {
         localStorage.removeItem('user');
         window.location.href = 'login.html';
     }
+
+    getToken() {
+        return this.token;
+    }
 }
+
+// Crear instancia global
+window.authService = new AuthService();
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
