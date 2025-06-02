@@ -58,11 +58,6 @@ class ReservasManager {
                 <tr>
                     <td>${evento.descripcion}</td>
                     <td>${evento.precio}€</td>
-                    <td>
-                        <button class="btn btn-sm btn-primary" onclick="reservarEvento('${evento._id}')">
-                            <i class="fas fa-calendar-plus me-1"></i>Reservar
-                        </button>
-                    </td>
                 </tr>
             `).join('');
         } catch (error) {
@@ -70,7 +65,7 @@ class ReservasManager {
             const tbody = document.getElementById('eventosTableBody');
             tbody.innerHTML = `
                 <tr>
-                    <td colspan="3" class="text-center text-danger">
+                    <td colspan="2" class="text-center text-danger">
                         <i class="fas fa-exclamation-circle me-2"></i>
                         Error al cargar los eventos
                     </td>
@@ -93,7 +88,6 @@ class ReservasManager {
                                 <strong>Precio:</strong> ${pack.precio}€
                                 ${pack.descuento ? `<span class="badge bg-danger">-${pack.descuento}%</span>` : ''}
                             </p>
-                            <button class="btn btn-primary">Reservar Pack</button>
                         </div>
                     </div>
                 </div>
