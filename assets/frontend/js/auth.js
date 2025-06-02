@@ -31,6 +31,33 @@ class AuthService {
         }
     }
 
+    async fetchWithAuth(endpoint) {
+        const response = await fetch(`${this.baseUrl}${endpoint}`, {
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Error en la petición');
+        }
+
+        return response.json();
+    }
+
+    async loadCastillos() {
+        return this.fetchWithAuth('/castillos');
+    }
+
+    async loadEventos() {
+        return this.fetchWithAuth('/eventos');
+    }
+
+    async loadPacks() {
+        return this.fetchWithAuth('/packs');
+    }
+
     isAuthenticated() {
         return !!this.token;
     }
@@ -41,13 +68,8 @@ class AuthService {
         localStorage.removeItem('user');
         window.location.href = 'login.html';
     }
-
-    getToken() {
-        return this.token;
-    }
 }
 
-// Crear instancia global
 window.authService = new AuthService();
 
 // Event Listeners
