@@ -244,5 +244,25 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/auth.js"></script>
     <script src="../js/reservas.js"></script>
+    <script>
+        // Verificar autenticación al cargar la página
+        if (!window.authService || !window.authService.checkAuth()) {
+            window.location.href = 'login.html';
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!window.authService || !window.authService.isAuthenticated()) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Initialize ReservasManager only if authenticated
+            if (!window.reservasManager) {
+                window.reservasManager = new ReservasManager();
+            }
+        });
+    </script>
 </body>
+
 </html>

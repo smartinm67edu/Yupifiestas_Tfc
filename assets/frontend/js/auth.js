@@ -4,6 +4,47 @@ class AuthService {
         this.token = localStorage.getItem('token');
     }
 
+    // Add checkAuth method
+    checkAuth() {
+        if (!this.isAuthenticated()) {
+            window.location.href = 'login.html';
+            return false;
+        }
+        return true;
+    }
+
+    async register(email, password) {
+        try {
+            console.log('Intentando registrar usuario:', { email });
+            const response = await fetch(`${this.baseUrl}/auth/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ 
+                    email: email.trim().toLowerCase(),
+                    password 
+                })
+            });
+
+            const data = await response.json();
+            console.log('Respuesta del servidor:', data);
+
+            if (!response.ok) {
+                throw new Error(data.message || 'Error en el registro');
+            }
+
+            this.token = data.token;
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('user', JSON.stringify(data.user));
+
+            return data;
+        } catch (error) {
+            console.error('Error detallado en registro:', error);
+            throw error;
+        }
+    }
+
     async login(email, password) {
         try {
             const response = await fetch(`${this.baseUrl}/auth/login`, {
@@ -24,9 +65,6 @@ class AuthService {
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
             
-            // Actualizar el email del usuario en la interfaz
-            this.updateUserDisplay();
-            
             return data;
         } catch (error) {
             console.error('Error en login:', error);
@@ -34,15 +72,23 @@ class AuthService {
         }
     }
 
-    updateUserDisplay() {
-        const userEmail = document.getElementById('user-email');
-        if (userEmail) {
-            const user = JSON.parse(localStorage.getItem('user'));
-            userEmail.textContent = user ? user.email : '';
+    async loadCastillos() {
+        try {
+            const response = await this.fetchWithAuth('/castillos');
+            console.log('Respuesta castillos:', response);
+            return response;
+        } catch (error) {
+            console.error('Error cargando castillos:', error);
+            throw error;
         }
     }
 
+    // Add fetchWithAuth method
     async fetchWithAuth(endpoint) {
+        if (!this.token) {
+            throw new Error('No hay token de autenticación');
+        }
+
         const response = await fetch(`${this.baseUrl}${endpoint}`, {
             headers: {
                 'Authorization': `Bearer ${this.token}`,
@@ -51,37 +97,47 @@ class AuthService {
         });
 
         if (!response.ok) {
-            throw new Error('Error en la petición');
+            const error = await response.json();
+            throw new Error(error.message || 'Error en la petición');
         }
 
         return response.json();
     }
 
-    async loadCastillos() {
-        return this.fetchWithAuth('/castillos');
-    }
-
-    async loadEventos() {
-        return this.fetchWithAuth('/eventos');
-    }
-
-    async loadPacks() {
-        return this.fetchWithAuth('/packs');
+    logout() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.location.href = 'login.html';
     }
 
     isAuthenticated() {
         return !!this.token;
     }
 
-    logout() {
-        this.token = null;
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        window.location.href = 'login.html';
+    // Add data loading methods
+    async loadEventos() {
+        try {
+            return await this.fetchWithAuth('/eventos');
+        } catch (error) {
+            console.error('Error cargando eventos:', error);
+            throw error;
+        }
+    }
+
+    async loadPacks() {
+        try {
+            return await this.fetchWithAuth('/packs');
+        } catch (error) {
+            console.error('Error cargando packs:', error);
+            throw error;
+        }
     }
 }
 
-window.authService = new AuthService();
+// Initialize single instance
+if (!window.authService) {
+    window.authService = new AuthService();
+}
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
@@ -100,22 +156,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Register form handler
-    document.getElementById('register-btn')?.addEventListener('click', async (e) => {
-        e.preventDefault();
-        try {
-            const email = document.getElementById('register-email').value;
-            const password = document.getElementById('register-password').value;
-            const confirmPassword = document.getElementById('register-confirm-password').value;
+    const registerBtn = document.getElementById('register-btn');
+    if (registerBtn) {
+        registerBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            try {
+                const email = document.getElementById('register-email').value;
+                const password = document.getElementById('register-password').value;
+                const confirmPassword = document.getElementById('register-confirm-password').value;
 
-            if (password !== confirmPassword) {
-                throw new Error('Las contraseñas no coinciden');
+                if (password !== confirmPassword) {
+                    throw new Error('Las contraseñas no coinciden');
+                }
+
+                await auth.register(email, password);
+            } catch (error) {
+                alert(error.message);
             }
-
-            await auth.register(email, password);
-        } catch (error) {
-            alert(error.message);
-        }
-    });
+        });
+    }
 
     // Logout handler
     document.getElementById('logout-btn')?.addEventListener('click', () => {
@@ -134,4 +193,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('register-form').style.display = 'none';
         document.getElementById('login-form').style.display = 'block';
     });
+
+    // Verificar si estamos en la página de reservas
+    if (window.location.pathname.includes('reserva.html')) {
+        if (!window.authService.checkAuth()) {
+            return;
+        }
+    }
 });

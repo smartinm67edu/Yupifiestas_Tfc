@@ -5,26 +5,12 @@ const castilloSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    descripcion: {
-        type: String,
-        required: true
-    },
-    imagen: {
-        type: String,
-        required: true
-    },
-    capacidad: {
-        type: Number,
-        required: true
-    },
-    dimensiones: {
-        type: String,
-        required: true
-    },
-    disponible: {
-        type: Boolean,
-        default: true
-    }
+    descripcion: String,
+    imagen: String,
+    dimensiones: String,
+    capacidad: String,
+    edad: String,
+    precio: Number
 });
 
 module.exports = mongoose.model('Castillo', castilloSchema);

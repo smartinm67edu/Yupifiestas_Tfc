@@ -107,6 +107,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error('Las contraseñas no coinciden');
             }
 
+            if (password.length < 6) {
+                throw new Error('La contraseña debe tener al menos 6 caracteres');
+            }
+
             await auth.register(email, password);
             alert('Registro exitoso. Por favor, inicia sesión.');
             

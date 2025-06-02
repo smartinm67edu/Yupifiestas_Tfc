@@ -5,21 +5,9 @@ const packSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    descripcion: {
-        type: String,
-        required: true
-    },
-    imagen: {
-        type: String
-    },
-    precio: {
-        type: Number,
-        required: true
-    },
-    descuento: {
-        type: Number,
-        default: 0
-    },
+    descripcion: String,
+    imagen: String,
+    precio: Number,
     castillos: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Castillo'

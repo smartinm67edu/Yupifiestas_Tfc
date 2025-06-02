@@ -1,65 +1,106 @@
 class ReservasManager {
     constructor() {
+        if (!window.authService) {
+            console.error('AuthService no está inicializado');
+            return;
+        }
         this.init();
     }
 
     async init() {
-        if (!window.authService.isAuthenticated()) {
-            window.location.href = 'login.html';
-            return;
-        }
-
-        // Mostrar el email del usuario
-        this.displayUserEmail();
-        
-        this.setupEventListeners();
-        await this.loadAllData();
-    }
-
-    displayUserEmail() {
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (user && user.email) {
-            const userEmailElement = document.getElementById('user-email');
-            if (userEmailElement) {
-                userEmailElement.textContent = user.email;
+        try {
+            if (!window.authService.isAuthenticated()) {
+                window.location.href = 'login.html';
+                return;
             }
+            console.log('Iniciando carga de datos...');
+            await this.loadAllData();
+            this.setupEventListeners();
+        } catch (error) {
+            console.error('Error en inicialización:', error);
         }
     }
 
     setupEventListeners() {
+        // Refresh buttons
         document.getElementById('refreshBtn')?.addEventListener('click', () => this.loadCastillos());
         document.getElementById('refreshEventosBtn')?.addEventListener('click', () => this.loadEventos());
         document.getElementById('refreshPacksBtn')?.addEventListener('click', () => this.loadPacks());
-        document.getElementById('logout-btn')?.addEventListener('click', () => window.authService.logout());
     }
 
     async loadAllData() {
-        await Promise.all([
-            this.loadCastillos(),
-            this.loadEventos(),
-            this.loadPacks()
-        ]);
+        try {
+            console.log('Cargando todos los datos...');
+            await Promise.all([
+                this.loadCastillos(),
+                this.loadEventos(),
+                this.loadPacks()
+            ]);
+        } catch (error) {
+            console.error('Error cargando datos:', error);
+        }
     }
 
     async loadCastillos() {
         try {
-            const castillos = await window.authService.loadCastillos();
-            const tbody = document.getElementById('castillosTableBody');
-            tbody.innerHTML = castillos.map(castillo => `
+            const tableBody = document.getElementById('castillosTableBody');
+            if (!tableBody) {
+                console.error('No se encontró la tabla de castillos');
+                return;
+            }
+
+            // Mostrar spinner
+            tableBody.innerHTML = `
                 <tr>
-                    <td><img src="${castillo.imagen}" alt="${castillo.nombre}" height="50"></td>
+                    <td colspan="6" class="text-center py-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Cargando...</span>
+                        </div>
+                    </td>
+                </tr>
+            `;
+
+            console.log('Solicitando castillos...');
+            const castillos = await window.authService.loadCastillos();
+            console.log('Castillos recibidos:', castillos);
+
+            if (!castillos || castillos.length === 0) {
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="text-center">No hay castillos disponibles</td>
+                    </tr>
+                `;
+                return;
+            }
+
+            // Renderizar castillos
+            tableBody.innerHTML = castillos.map(castillo => `
+                <tr>
+                    <td>
+                        <img src="${castillo.imagen || '../img/castillos/default.jpg'}" 
+                             alt="${castillo.nombre}"
+                             class="img-thumbnail"
+                             style="width: 100px">
+                    </td>
                     <td>${castillo.nombre}</td>
-                    <td>${castillo.descripcion}</td>
-                    <td>${castillo.capacidad} personas</td>
-                    <td>${castillo.dimensiones}</td>
-                    <td>${castillo.disponible ? 
-                        '<span class="badge bg-success">Disponible</span>' : 
-                        '<span class="badge bg-danger">No disponible</span>'}
+                    <td>${castillo.descripcion || 'Sin descripción'}</td>
+                    <td>${castillo.capacidad || 'N/A'}</td>
+                    <td>${castillo.dimensiones || 'N/A'}</td>
+                    <td>
+                        <span class="badge bg-success">Disponible</span>
                     </td>
                 </tr>
             `).join('');
+
         } catch (error) {
             console.error('Error loading castillos:', error);
+            document.getElementById('castillosTableBody').innerHTML = `
+                <tr>
+                    <td colspan="6" class="text-center text-danger">
+                        Error al cargar los castillos: ${error.message}
+                    </td>
+                </tr>
+            `;
         }
     }
 
@@ -111,6 +152,9 @@ class ReservasManager {
     }
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-    window.reservasManager = new ReservasManager();
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    if (!window.reservasManager) {
+        window.reservasManager = new ReservasManager();
+    }
 });
