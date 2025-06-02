@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         document.body.classList.remove('admin');
                     }
 
-                    window.location.href = "../../html/reservas.html"; // ajusta si es necesario
+                    window.location.href = "../../html/reservas.html";
 
                 } catch (err) {
                     alert('Error de conexión al servidor');
@@ -195,7 +195,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 userEmail.textContent = user.email;
             };
 
-            // ✅ Detectar sesión activa desde sessionStorage
             const storedUser = sessionStorage.getItem('user');
             if (storedUser) {
                 const user = JSON.parse(storedUser);
@@ -209,7 +208,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ================= EVENTOS =================
     function initEventListeners() {
-        // Videos
         document.querySelectorAll('.evento-video, .pack-video').forEach(video => {
             video.addEventListener('mouseenter', () => {
                 video.style.transform = 'scale(1.03)';
@@ -220,7 +218,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Lightbox
         const lightbox = document.getElementById('lightbox');
         if (lightbox) {
             document.querySelectorAll('.zoomable').forEach(img => {
@@ -241,14 +238,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // ================= VISIBILIDAD EVENTOS =================
+    function mostrarEventosAlScroll() {
+        const eventos = document.querySelectorAll('.evento');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        eventos.forEach(evento => observer.observe(evento));
+    }
+
     // ================= INICIALIZACIÓN =================
     function initialize() {
         init.menuToggle();
         init.carousel();
         init.auth();
         initEventListeners();
+        mostrarEventosAlScroll(); // <-- añadido aquí
     }
 
     initialize();
 });
-
