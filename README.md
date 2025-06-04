@@ -34,7 +34,6 @@ Yupifiestas_Tfc/
 │       ├── js/
 │       ├── img/
 │       └── html/
-├── docs/
 └── README.md
 ```
 
@@ -126,7 +125,7 @@ MIT License - ver [LICENSE.md](LICENSE.md)
 5. Abrir Pull Request
 
 ## 👥 Autores
-- TuNombre - Desarrollo Full Stack
+- Sebastián Martin - Desarrollo Full Stack
 
 ## 🙏 Agradecimientos
 - Font Awesome por los iconos
