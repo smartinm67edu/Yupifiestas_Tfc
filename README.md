@@ -1,9 +1,9 @@
-# 🎪 Yupifiestas - Alquiler de Castillos Hinchables y Eventos
+# Yupifiestas - Alquiler de Castillos Hinchables y Eventos
 
-## 📝 Descripción
+## Descripción
 Yupifiestas es una plataforma web dedicada al alquiler de castillos hinchables y organización de eventos. Ofrecemos servicios para fiestas infantiles, despedidas de soltero/a, eventos corporativos y celebraciones especiales.
 
-## 🚀 Características Principales
+## Características Principales
 - Catálogo de castillos hinchables
 - Sistema de reservas online
 - Gestión de eventos personalizados
@@ -13,7 +13,7 @@ Yupifiestas es una plataforma web dedicada al alquiler de castillos hinchables y
 - Blog informativo
 - Diseño responsive
 
-## 🛠️ Tecnologías Utilizadas
+## Tecnologías Utilizadas
 - HTML5
 - CSS3
 - JavaScript (ES6+)
@@ -21,7 +21,7 @@ Yupifiestas es una plataforma web dedicada al alquiler de castillos hinchables y
 - Node.js (Backend)
 - MongoDB (Base de datos)
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 ```
 Yupifiestas_Tfc/
 ├── assets/
@@ -37,7 +37,7 @@ Yupifiestas_Tfc/
 └── README.md
 ```
 
-## 🔧 Instalación
+## Instalación
 1. Clonar el repositorio:
 ```bash
 git clone https://github.com/tuusuario/Yupifiestas_Tfc.git
@@ -60,21 +60,21 @@ cp .env.example .env
 npm start
 ```
 
-## 📱 Responsive Design
+## Responsive Design
 - Mobile-first approach
 - Breakpoints:
   - Mobile: < 768px
   - Tablet: 768px - 1024px
   - Desktop: > 1024px
 
-## 🔐 Seguridad
+## Seguridad
 - Autenticación JWT
 - Encriptación de contraseñas
 - Validación de formularios
 - Protección contra XSS
 - Headers de seguridad
 
-## 📄 API Endpoints
+## API Endpoints
 ```
 GET    /api/castillos     - Lista de castillos
 POST   /api/reservas      - Crear reserva
@@ -83,7 +83,7 @@ POST   /api/auth/login    - Autenticación
 POST   /api/auth/register - Registro
 ```
 
-## 💻 Scripts Disponibles
+## Scripts Disponibles
 ```json
 {
   "start": "node server.js",
@@ -93,14 +93,14 @@ POST   /api/auth/register - Registro
 }
 ```
 
-## 🎨 Estilos y Temas
+## Estilos y Temas
 - Paleta de colores:
   - Primary: `#ff6b6b`
   - Secondary: `#4ecdc4`
   - Text: `#2d3436`
   - Background: `#f8f9fa`
 
-## 📊 Base de Datos
+## Base de Datos
 - MongoDB Atlas
 - Colecciones:
   - users
@@ -109,13 +109,10 @@ POST   /api/auth/register - Registro
   - eventos
   - blog
 
-## 🔍 Testing
+## Zesting
 ```bash
 npm test
 ```
-
-## 📝 Licencia
-MIT License - ver [LICENSE.md](LICENSE.md)
 
 ## ✨ Contribuir
 1. Fork del repositorio
@@ -124,15 +121,11 @@ MIT License - ver [LICENSE.md](LICENSE.md)
 4. Push a la rama (`git push origin feature/AmazingFeature`)
 5. Abrir Pull Request
 
-## 👥 Autores
+## Autor
 - Sebastián Martin - Desarrollo Full Stack
 
-## 🙏 Agradecimientos
-- Font Awesome por los iconos
-- Google Fonts por las tipografías
-- Unsplash por las imágenes de stock
 
-## 📞 Contacto
+## Contacto
 - Web: [www.yupifiestas.es](http://www.yupifiestas.es)
 - Email: info@yupifiestas.es
 - Tel: +34 123 456 789
