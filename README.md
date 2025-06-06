@@ -114,7 +114,7 @@ POST   /api/auth/register - Registro
 npm test
 ```
 
-## ✨ Contribuir
+## Contribuir
 1. Fork del repositorio
 2. Crear rama feature (`git checkout -b feature/AmazingFeature`)
 3. Commit cambios (`git commit -m 'Add AmazingFeature'`)
